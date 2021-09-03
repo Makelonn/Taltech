@@ -58,6 +58,19 @@ Clear the workspace is `rm(list = ls())`
     D=t(B)
     determinant = det(D)
 
+To select more than one row or column :
+
+    B[c(1,5,6),c(10,12)]
+
+Will select cols 10 & 12 from rows 1, 5 and 6
+
+You can also use slices as in python
+
+To address cols by name (either name from the csv or the name auto-given which is V1 ... V10 ... VX for a csv)
+
+    B$name
+    B[, 'name']
+
 Access to an element / line / row :
 
 `R
@@ -70,6 +83,14 @@ Carefull, in R it start at 1 so it's like :
 | :--: | :--:| :--:|
 | [2,1] | [2,2] | [2,3] |
 
+
+### Summary function
+
+Give : min, max, first quartile, median, third quartile, and mean
+
+### Other usefull fct°
+
+* `apply` : repeat a function on all rows (MARGIN =1) or cols (=2)
 ### Concatenation
 
 Concatener A :
@@ -135,3 +156,11 @@ To define :
 To use :
 
     myfct(1 ,2)
+
+If return statement is not defined, the last line variable will be returned
+
+## On data 
+
+Can use `min`, `max`, `mean`, `median`, `sd`(which is the standard deviation)
+
+Carefull bc some function dont automatically convert to numerical variable
