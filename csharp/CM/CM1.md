@@ -5,7 +5,7 @@
 
 To do:
 * Repo name must be **ics0010-2021f** + don't forget gitignore
-* Dotnet 5.0 SDK to download
+* Dotnet 5.0 SDK to download DONE
 * Jetbrains reshaper
 
 
