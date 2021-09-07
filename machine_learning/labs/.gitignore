@@ -1,0 +1,9 @@
+Debug
+Release
+.settings/
+.metadata/
+*.mk
+*.d
+*.o
+.mxproject
+
