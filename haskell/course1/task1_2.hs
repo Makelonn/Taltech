@@ -2,19 +2,14 @@
 --Circonference : 2*pi*r
 --Area : pi*(r**2)
 
-circonference r = putStrLn("Circonference for " ++ show r ++ " is "++ show circ) where
+circleCirc r = putStrLn("Circonference for a radius of " ++ show r ++ " is "++ show circ) where
     circ = 2*pi*r
 
-area r = pi*(r**2)
+circleArea r = putStrLn("Area for a radius of " ++ show r ++ " is " ++ show area) where
+    area = pi*(r**2)
 
 main = do
-    putStrLn("Test for 2")
-    putStrLn("Circonference")
-    print(circonference 2)
-    putStrLn("Area")
-    print(area 2)
-    putStrLn("Test for 8")
-    putStrLn("Circonference")
-    print(circonference 8)
-    putStrLn("Area")
-    print(area 8)
+    circleCirc 2
+    circleArea 2
+    circleCirc 8
+    circleArea 8
