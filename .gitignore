@@ -2,6 +2,6 @@
 .Rhistory
 .RData
 .Ruserdata
-.hi
-.exe
-.o
+*.hi
+*.exe
+*.o
