@@ -50,3 +50,54 @@ And `double` : `double myNum = 19.99D;`
     double myD = 7.52;
     int myI = (int) myD;
 
+### Classes
+
+Can do nested class and inheritance
+
+By default constructor and destructor (with ~ before)
+
+Only one destructor by class
+
+Use `IDisposable` instead of destructor
+
+### Access modifiers
+
+*public* : accessed by any other code in the same assembly or assembly that refer to it
+
+*private* : only accessed by the same class
+
+*protected*: only by same class or derived
+
+*internal* : accessed by any code in the same assembly but not from another
+
+*protected internal* : any code in the same assembly or any derived class in another assembly
+
+### Static class
+
+Smthg static is shared by all instances of a class
+
+### Anonymous types
+
+Compiler generate a class for you (var Sample = new {code};)
+
+### Inheritance 
+
+Not be used as a class base :
+
+    public sealed class A{}
+
+Only be used as a base class (no instanciation):
+
+    public abstract class B{}
+
+### Overriding
+
+*virtual* : allow a class member to be overriden in derived clqss
+
+*override* : to override member in the base class
+
+*abstract* : requires to be overriden in derived
+
+*new* : hides a member inherited from base class : replace the member from base class (if not use -> warning)
+
+
