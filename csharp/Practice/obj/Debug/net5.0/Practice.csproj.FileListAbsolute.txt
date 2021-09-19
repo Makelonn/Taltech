@@ -1,0 +1,16 @@
+C:\Users\maeli\Documents\INSA\4A\Taltech\csharp\Practice\bin\Debug\net5.0\Practice.exe
+C:\Users\maeli\Documents\INSA\4A\Taltech\csharp\Practice\bin\Debug\net5.0\Practice.deps.json
+C:\Users\maeli\Documents\INSA\4A\Taltech\csharp\Practice\bin\Debug\net5.0\Practice.runtimeconfig.json
+C:\Users\maeli\Documents\INSA\4A\Taltech\csharp\Practice\bin\Debug\net5.0\Practice.runtimeconfig.dev.json
+C:\Users\maeli\Documents\INSA\4A\Taltech\csharp\Practice\bin\Debug\net5.0\Practice.dll
+C:\Users\maeli\Documents\INSA\4A\Taltech\csharp\Practice\bin\Debug\net5.0\ref\Practice.dll
+C:\Users\maeli\Documents\INSA\4A\Taltech\csharp\Practice\bin\Debug\net5.0\Practice.pdb
+C:\Users\maeli\Documents\INSA\4A\Taltech\csharp\Practice\obj\Debug\net5.0\Practice.csproj.AssemblyReference.cache
+C:\Users\maeli\Documents\INSA\4A\Taltech\csharp\Practice\obj\Debug\net5.0\Practice.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\maeli\Documents\INSA\4A\Taltech\csharp\Practice\obj\Debug\net5.0\Practice.AssemblyInfoInputs.cache
+C:\Users\maeli\Documents\INSA\4A\Taltech\csharp\Practice\obj\Debug\net5.0\Practice.AssemblyInfo.cs
+C:\Users\maeli\Documents\INSA\4A\Taltech\csharp\Practice\obj\Debug\net5.0\Practice.csproj.CoreCompileInputs.cache
+C:\Users\maeli\Documents\INSA\4A\Taltech\csharp\Practice\obj\Debug\net5.0\Practice.dll
+C:\Users\maeli\Documents\INSA\4A\Taltech\csharp\Practice\obj\Debug\net5.0\ref\Practice.dll
+C:\Users\maeli\Documents\INSA\4A\Taltech\csharp\Practice\obj\Debug\net5.0\Practice.pdb
+C:\Users\maeli\Documents\INSA\4A\Taltech\csharp\Practice\obj\Debug\net5.0\Practice.genruntimeconfig.cache

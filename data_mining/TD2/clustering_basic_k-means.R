@@ -4,10 +4,10 @@ rm(list=ls())
 
 library(shotGroups)
 # load the data
-load(file="/Users/sven/Google Drive/Teaching/Data_Mining_2021/Practice_02/kdata.RData")
+load(file="\\Users\\maeli\\Documents\\INSA\\4A\\Taltech\\data_mining\\TD3\\data_training\\dataforEM.RData")
 # NB!!!!!!!!   variable x will appear in the workspace.
 #split the data in proportion 70/30 for training and validation purposes.
-sample_size <- floor(0.7 * nrow(x))
+sample_size <- floor(0.9 * nrow(x))
 
 #set.seed(123) # seed is necessary to make it reproducible
 train_ind <- sample(seq_len(nrow(x)), size = sample_size)
@@ -17,10 +17,11 @@ train_set <- x[train_ind, ]
 test <- x[-train_ind, ]
 train <- train_set[,1:2] 
 
-#results <- kmeans(train,3) #k-means needs to know k value, number of clusters
-#idx = results[["cluster"]]
+results <- kmeans(train,3) #k-means needs to know k value, number of clusters
+idx = results[["cluster"]]
 
-#for (i in seq(along=idx)){
+
+# for (i in seq(along=idx)){
 #  a<-switch(idx[i],"red","green","blue") 
 #  plot(train[i,1],train[i,2], col=a,type="p",xlim=c(-10,20),ylim=c(-10,20))
 #  par(new=TRUE)
@@ -33,7 +34,7 @@ train <- train_set[,1:2]
 
 #drawEllipse(results$centers[1,], cov_cluster_1, radius=3, nv = 100, axes = FALSE, fg = par('fg'), bg = NA, colCtr = "red", lty = par('lty'), lwd = par('lwd'), pch = par('pch'), cex = par('cex'))
 # K-Means Clustering with 5 clusters
-fit <- kmeans(train, 3)
+fit <- kmeans(train, 4)
 
 
 library(cluster)
