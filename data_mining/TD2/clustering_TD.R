@@ -65,7 +65,7 @@ get_label <- function(dataset, centroids){
   for (i in seq(along=1:nrow(dataset))){
     temp_dist <- matrix(,nrow=nrow(centroids))
     for (j in seq(along=1:nrow(centroids))){
-      temp_dist[j,] = get_distance(centroids[j,], dataset[i,1:2], "Euclidean")
+      temp_dist[j,] = get_distance(centroids[j,], dataset[i,1:2], "Mahalanobis")
     }
     dataset[i, 3] = which.min(temp_dist)
   }
