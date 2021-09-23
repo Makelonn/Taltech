@@ -3,8 +3,9 @@
 removeDup :: [a] -> [a]
 removeDup [x] = [x]
 removeDup entryList = 
-    if (x == y) outList = removeDup x: (tail entryList)
-    else outList = [x,y] ++  removeDup tail entryList
+    if (x == y) then 
+        outList <- removeDup x ++ [tail entryList]
+    else outList <- [x,y] ++  removeDup tail entryList
     where
         x:y:xs = entryList
 

@@ -1,16 +1,17 @@
 -- Fibonnacci sequence up to an index
 
-fibonnacciToIndex :: Int -> [a]
-fibonnacciToIndex 0 = []
+fibonnacciToIndex :: Int -> [Int]
+fibonnacciToIndex 1 = [0,1]
 fibonnacciToIndex index =
-    minus1List ++ [minus1 + minus2]
+    [sum, minus1, minus2] ++ minus1List
     where
-        minus1List = fibonnacciToIndex index-1
-        minus1 = last minus1List
-        minus2 = minus1List!!(lenght(minus1List)-1)
+        minus1List = fibonnacciToIndex (index-1)
+        minus1:minus2:xs = minus1List
+        sum = minus1 + minus2
 
 main=do
-    putStrLn("Enter a number : ")
+    putStrLn "Enter a number : "
     num <- getLine
     let index_fib = (read num :: Int)
-    putStrLn("The Fibonnacci sequence up to the " ++ show index_fib ++ " is " ++ show fibonnacciToIndex index_fib)
+    putStrLn("The Fibonnacci sequence up to the " ++ show index_fib ++ " is ")
+    let fibo_list = fibonnacciToIndex index_fib

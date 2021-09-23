@@ -1,15 +1,19 @@
 -- Grade depending on scale
+between :: Int -> Int -> Int -> Bool
+between a b c --return if a is between b an c
+    | a >= b = a <= c --we check if a>=b , if yes the statement is 'is a > c' so we have b<=a<c
+    | otherwise = False
 
 gradingScale :: Int -> String
 gradingScale gradeNb 
-    |80 < gradeNb < 90 = "A+"
-    |70 < gradeNb < 79 = "A"
-    |60 < gradeNb < 69 = "B"
-    |50 < gradeNb < 59 = "C"
-    | gradeNb < 50 ="Fail :("
+    |between gradeNb 80 90 = "A+"
+    |between gradeNb 70 79 = "A"
+    |between gradeNb 60 69= "B"
+    |between gradeNb 50 59= "C"
+    |between gradeNb 0 50 ="Fail :("
     |otherwise="This is not a grade !"
 
-main=doq
+main=do
     putStrLn("Enter a grade : ")
     num <- getLine
     let grade = (read num :: Int)
