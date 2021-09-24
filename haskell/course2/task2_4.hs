@@ -2,12 +2,14 @@
 -- init <- remove the last elem
 removeDup :: [Int] -> [Int]
 removeDup [x] = [x]
+removeDup [x, y] = if x == y then [x] else [x,y]
 removeDup entryList =
     if x == y then
         x : removeDup the_tail
     else [x,y] ++  removeDup the_tail
     where
-        x:y:xs = entryList
+        x = head entryList
+        y = head entryList
         the_tail = if null entryList then [] else tail (tail entryList)
 
 main=do
