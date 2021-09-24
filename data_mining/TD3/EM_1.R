@@ -2,25 +2,29 @@
 
 # clear everything and load required libraries/codes
 rm(list=ls())
+graphics.off()
 library(mvtnorm)
 library(car)
 library(scales)
 #source("C:/Users/Sven/Google Drive/Teaching/Data_Mining_2020/Lab3/mySum.R")
-source("/Users/sven/Google Drive/Teaching/Data_Mining_2020/Lab3/mySum.R")
+source("C:\\Users\\maeli\\Documents\\INSA\\4A\\Taltech\\data_mining\\TD3\\mySum.R")
 
 
 #loading and plotting data
 #setwd("C:/Users/Sven/Google Drive/Teaching/Data_Mining_2020/Lab3/Data")
-setwd("/Users/sven/Google Drive/Teaching/Data_Mining_2020/Lab3/Data")
+setwd("C:\\Users\\maeli\\Documents\\INSA\\4A\\Taltech\\data_mining\\TD3\\data_training\\")
 
 #load("2dData-strange.RData")
 #load("C:/Users/Sven/Google Drive/Teaching/Data_Mining_2020/Lab3/Data/2gaussiandata.RData")
-load("/Users/sven/Google Drive/Teaching/Data_Mining_2020/Lab3/Data/2gaussiandata.RData")
+load("C:\\Users\\maeli\\Documents\\INSA\\4A\\Taltech\\data_mining\\TD3\\data_training\\dataforEM.RData")
 
-plot(x[,1],x[,1], col=scales::alpha(x[,3],0.3), pch=20, xlim=c(-12,10),ylim=c(-12,12)) #*****plotting data
+#plot(x[,1],x[,1], col=scales::alpha(x[,3],0.3), pch=20, xlim=c(-12,10),ylim=c(-12,12)) #*****plotting data
+plot(x[,1], x[,2], type="p")
 
 # data manipulation
-classes <- x[,3] #labels vector
+nb_cluster <- 2
+
+classes <- x[,3] #labels vector -> randomly but even repartidly
 x <-x[,1:2] #removing labels from data
 hist(x, col="blue")
 plot(density(x))
