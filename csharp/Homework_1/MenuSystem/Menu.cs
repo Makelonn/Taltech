@@ -117,7 +117,7 @@ namespace MenuSystem
                 Console.WriteLine(t);
             }
 
-            Console.WriteLine("-------------------");
+            Console.WriteLine(":-------------------");
 
             switch (_menuLevel)
             {

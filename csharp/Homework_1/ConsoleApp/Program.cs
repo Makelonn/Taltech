@@ -7,7 +7,7 @@ namespace ConsoleApp
 {
     class Program
     {
-        private static double CalculatorCurrentDisplay = 0.0;
+        private static double CalculatorCurrentValue = 0.0;
         
         static void Main(string[] args)
         {
@@ -19,14 +19,88 @@ namespace ConsoleApp
             {
                 new MenuItem("A", "Binary operations", SubmenuBinary),
                 new MenuItem("S", "Unary operations", SubmenuUnary),
+                new MenuItem("Del", "Reset value", ResetCurrentValue),
             });
             
             mainMenu.Run();
         }
 
-        public static string MethodA()
+        public static string ResetCurrentValue()
         {
-            Console.WriteLine("Method A!!!!!");
+            CalculatorCurrentValue = 0.0;
+            Console.Clear();
+            Console.WriteLine("====> Value reset to 0.0 <====");
+            return "";
+        }
+
+        //-----BINARY OPERATIONS-----
+        public static string Add()
+        {
+            // CalculatorCurrentValue
+            Console.Write("[Enter number] " + CalculatorCurrentValue + " + ");
+            var n = Console.ReadLine()?.Trim();
+            double.TryParse(n, out var converted);
+            CalculatorCurrentValue = CalculatorCurrentValue + converted;
+            Console.Clear();
+            Console.WriteLine("====> Value " + CalculatorCurrentValue + " <====");
+            return "";
+        }
+
+        public static string Sub()
+        {
+            Console.Write("[Enter number] " + CalculatorCurrentValue + " - ");
+            var n = Console.ReadLine()?.Trim();
+            double.TryParse(n, out var converted);
+            CalculatorCurrentValue = CalculatorCurrentValue - converted;
+            Console.Clear();
+            Console.WriteLine("====> Value " + CalculatorCurrentValue + " <====");
+            return "";
+        }
+
+        public static string Divide()
+        {
+            Console.Write("[Enter number] " + CalculatorCurrentValue + " / ");
+            var n = Console.ReadLine()?.Trim();
+            double.TryParse(n, out var converted);
+            CalculatorCurrentValue = CalculatorCurrentValue / converted;
+            Console.Clear();
+            Console.WriteLine("====> Value " + CalculatorCurrentValue + " <====");
+            return "";
+        }
+
+        public static string Multiply()
+        {
+            Console.Write("[Enter number] " + CalculatorCurrentValue + " * ");
+            var n = Console.ReadLine()?.Trim();
+            double.TryParse(n, out var converted);
+
+            CalculatorCurrentValue = CalculatorCurrentValue * converted;
+            Console.Clear();
+            Console.WriteLine("====> Value " + CalculatorCurrentValue + " <====");
+            return "";
+        }
+
+        public static string Power()
+        {
+            Console.Write("[Enter number] " + CalculatorCurrentValue + " ^ ");
+            var n = Console.ReadLine()?.Trim();
+            double.TryParse(n, out var converted);
+
+            CalculatorCurrentValue = Math.Pow(CalculatorCurrentValue,converted);
+            Console.Clear();
+            Console.WriteLine("====> Value " + CalculatorCurrentValue + " <====");
+            return "";
+        }
+
+        public static string Root()
+        {
+            Console.Write("[Enter number] " + CalculatorCurrentValue + " root Nth : ");
+            var n = Console.ReadLine()?.Trim();
+            double.TryParse(n, out var converted);
+
+            CalculatorCurrentValue = Math.Pow(CalculatorCurrentValue,1/converted);
+            Console.Clear();
+            Console.WriteLine("====> Value " + CalculatorCurrentValue + " <====");
             return "";
         }
 
@@ -36,26 +110,55 @@ namespace ConsoleApp
             menu.AddMenuItems(new List<MenuItem>()
             {
                 new MenuItem("+", "+", Add),
-                new MenuItem("-", "-", MethodA),
-                new MenuItem("/", "/", MethodA),
-                new MenuItem("*", "*", MethodA),
+                new MenuItem("-", "-", Sub),
+                new MenuItem("/", "/", Divide),
+                new MenuItem("*", "*", Multiply),
+                new MenuItem("P", "Pow", Power),
+                new MenuItem("V", "Root", Root),
+                new MenuItem("Del", "Reset value", ResetCurrentValue),
 
             });
             var res = menu.Run();
             return res;
         }
-
-        public static string Add()
+        //----------UNARY OPERATION----------
+        public static string Negate()
         {
-            // CalculatorCurrentDisplay
-            Console.WriteLine("Current value: " + CalculatorCurrentDisplay);
-            Console.WriteLine("plus");
-            Console.Write("number: ");
-            var n = Console.ReadLine()?.Trim();
-            double.TryParse(n, out var converted);
+            CalculatorCurrentValue = -CalculatorCurrentValue;
+            Console.Clear();
+            Console.WriteLine("====> Value " + CalculatorCurrentValue + " <====");
+            return "";
+        }
 
-            CalculatorCurrentDisplay = CalculatorCurrentDisplay + converted;
-            
+        public static string Squareroot()
+        {
+            CalculatorCurrentValue = Math.Sqrt(CalculatorCurrentValue);
+            Console.Clear();
+            Console.WriteLine("====> Value " + CalculatorCurrentValue + " <====");
+            return "";
+        }
+
+        public static string Square()
+        {
+            CalculatorCurrentValue = Math.Pow(CalculatorCurrentValue,2);
+            Console.Clear();
+            Console.WriteLine("====> Value " + CalculatorCurrentValue + " <====");
+            return "";
+        }
+
+        public static string Inc()
+        {
+            CalculatorCurrentValue++;
+            Console.Clear();
+            Console.WriteLine("====> Value " + CalculatorCurrentValue + " <====");
+            return "";
+        }
+
+        public static string Dec()
+        {
+            CalculatorCurrentValue--;
+            Console.Clear();
+            Console.WriteLine("====> Value " + CalculatorCurrentValue + " <====");
             return "";
         }
 
@@ -64,9 +167,12 @@ namespace ConsoleApp
             var menu = new Menu("Unary", EMenuLevel.First);
             menu.AddMenuItems(new List<MenuItem>()
             {
-                new MenuItem("Negate", "Negate", MethodA),
-                new MenuItem("Sqrt", "Sqrt", MethodA),
-                new MenuItem("Root", "Root", MethodA),
+                new MenuItem("N", "Negate", Negate),
+                new MenuItem("Q", "Sqrt", Squareroot),
+                new MenuItem("S", "Square", Square),
+                new MenuItem("++", "Increment", Inc),
+                new MenuItem("--", "Decrement", Dec),
+                new MenuItem("Del", "Reset value", ResetCurrentValue),
             });
             var res = menu.Run();
             return res;
