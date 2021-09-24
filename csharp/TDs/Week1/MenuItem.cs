@@ -2,29 +2,28 @@
 
 namespace MenuSystem
 {
-    public class MenuItem
+    public class MenuItem 
     {
-        public MenuItem(string ShortCut, string Title){
-            if(ShortCut == null || ShortCut.Length==0)
+        public MenuItem(string shortCut, string title)
+        {
+            if (string.IsNullOrEmpty(shortCut))
             {
-                throw new ArgumentException(message:"Shortcut can not be empty");
+                throw new ArgumentException("shortCut cannot be empty!");
             }
-            if(Title == null || Title.Length==0)
+            if (string.IsNullOrEmpty(title))
             {
-                throw new ArgumentException(message:"Title can not be empty");
+                throw new ArgumentException("title cannot be empty!");
             }
-            ShortCut = ShortCut.Trim();
-            Title = Title.Trim();
+            
+            ShortCut = shortCut.Trim();
+            Title = title.Trim();
         }
-
-        public string Title{ get; private set;}
-        public string ShortCut {get; private set;}
+        public string Title { get; private set; }
+        public string ShortCut { get; private set; }
 
         public override string ToString()
         {
             return ShortCut + ") " + Title;
         }
-
-        
     }
 }
