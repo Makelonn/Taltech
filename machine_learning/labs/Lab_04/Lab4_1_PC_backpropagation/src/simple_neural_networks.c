@@ -216,15 +216,21 @@ void weightsB_zero_initialization(double * weightsB, uint32_t LEN){
 void relu_backward(uint32_t m, uint32_t LAYER_LEN, double dA[m][LAYER_LEN], double Z[m][LAYER_LEN], double dZ[m][LAYER_LEN]) {
 	//TODO: implement derivative of relu function  You can can choose either to calculate for all example at the same time
 	//or make iteratively. Check formula for derivative lecture 5 on slide 24
-	//Relu derivative :
-	/*if(x>0) return x;
-	else return 1;
-	m is the number of data*/
-	
-	/*int i=0;
-	for(i=0, i<m; i++)
+
+	// Let's suppose that : dA is from the next layer (input for back propagation )
+	// Z is the value in the node
+	// dZ is the output we want to calculate
+
+	//m is the number of data / the nb of exemple for the training*/
+	int i=0, ex=0;
+	for(ex=0; ex<m; ex++)
 	{
-	}*/
+		for(i=0; i<LAYER_LEN; i++)
+		{
+			dZ[ex][i]=dA[ex][i]*Z[ex][i];
+		}
+	}
+
 }
 
 
