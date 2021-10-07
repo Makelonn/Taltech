@@ -155,10 +155,12 @@ double compute_cost(uint32_t m, double yhat[m][1], double y[m][1]) {
 	double cost = 0;
 	int i=0;
 	// TODO: Calculate cost based on mathematical cost function formula
-	for(i=0; i<m; i++){
-		cost += pow(yhat[i][1] - y[i][1],2);
+	for(i=0; i<m; i++){ 
+		//h = yhat 
+		//cost += pow(yhat[i][1] - y[i][1],2);
+		cost+=y[i][1]*log(yhat[i][1]+(1-y[i][1]))*log(1-yhat[i][1]);
 	}
-	return (cost/m);
+	return (-cost/m);
 }
 
 
@@ -238,6 +240,22 @@ void linear_backward(uint32_t LAYER_LEN, uint32_t PREV_LAYER_LEN, uint32_t m, do
 		double A_prev[m][PREV_LAYER_LEN], double dW[LAYER_LEN][PREV_LAYER_LEN], double * db ){
 	// TODO: implement linear backward. You can can choose either to calculate for all example at the same time (dw= 1/m *A_prev[T]*dZ;)
 	//or make iteratively  (dw_iter= A_prev[T]*dZ;)
+	// Calculate Dw
+	int i=0, j=0, ex=0;
+	for(i=0;i<LAYER_LEN;i++)
+	{
+		for(j=0; j<PREV_LAYER_LEN; j++)
+		{
+			dW[i][j]=0;
+			for(ex=0; ex<m; ex++)
+			{
+				dW[i][j]+=A_prev[ex][j]*dZ[ex][j];
+			}
+			(*db) += dW[i][j];
+		}
+	}
+	*db= (1/m)*(*db);
+
 }
 
 
@@ -301,6 +319,15 @@ void weights_update(uint32_t MATRIX_ROW, uint32_t MATRIX_COL, double learning_ra
 									double dW[MATRIX_ROW][MATRIX_COL],
 									double W[MATRIX_ROW][MATRIX_COL]) {
 	//TODO: implement weights_update function
+	int i=0, j=0;
+	for(i=0; i<MATRIX_ROW;i++)
+	{
+		for(j=0; j<MATRIX_COL; j++)
+		{
+			//new W = old_W-alpha(=learning_rate)*dW
+			W[i][j]=W[i][j]-learning_rate*dW[i][j];
+		}
+	}
 }
 
 

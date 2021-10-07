@@ -2,7 +2,6 @@
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 
 double single_in_single_out_nn(double  input, double weight) {
 	return input*weight;
@@ -40,12 +39,12 @@ void single_input_multiple_output_nn(double input_scalar, double *weight_vector,
 
 
 void matrix_vector_multiplication(double * input_vector, uint32_t INPUT_LEN, double * output_vector,
-	uint32_t OUTPUT_LEN, double weights_matrix[OUTPUT_LEN][INPUT_LEN]) {
-		int i,j;
+		uint32_t OUTPUT_LEN, double weights_matrix[OUTPUT_LEN][INPUT_LEN]) {
+	int i,j;
 	for(i=0; i<OUTPUT_LEN; i++){
-	//For each output calculate the weighted some of all input
-	*(output_vector+i) = 0;
-	for(j=0; j<INPUT_LEN; j++){
+		//For each output calculate the weighted some of all input
+		*(output_vector+i) = 0;
+		for(j=0; j<INPUT_LEN; j++){
 			*(output_vector+i) += *(input_vector+j)*weights_matrix[i][j];
 		}
 	}
@@ -73,10 +72,12 @@ void hidden_nn( double *input_vector, uint32_t INPUT_LEN,
 }
 
 
+
+// Calculate the error using yhat (predicted value) and y (expected value)
 double find_error(double yhat, double y) {
 	// TODO: Use math.h functions to calculate the error with double precision
 	double error = pow(yhat-y,2);
-    return 0;
+	return error;
 }
 
 
@@ -110,6 +111,7 @@ void brute_force_learning( double input, double weight, double expected_value, d
 }
 
 
+
 void linear_forward_nn(double *input_vector, uint32_t INPUT_LEN,
 						double *output_vector, uint32_t OUTPUT_LEN,
 						double weights_matrix[OUTPUT_LEN][INPUT_LEN], double *weights_b) {
@@ -137,8 +139,7 @@ void vector_relu(double *input_vector, double *output_vector, uint32_t LEN) {
 
 double sigmoid(double x) {
 	// TODO: Calculate sigmoid based on its mathematical formula
-	 //double result =  1 / (1+exp(-x));
-	 double result = exp(x) / (exp(x) + 1);
+	 double result =  1 / (1+exp(-x));
 	 return result;
 }
 
@@ -149,26 +150,15 @@ void vector_sigmoid(double * input_vector, double * output_vector, uint32_t LEN)
 	}
 }
 
-
+//yhat (predicted value) and y (expected value)
 double compute_cost(uint32_t m, double yhat[m][1], double y[m][1]) {
 	double cost = 0;
 	int i=0;
 	// TODO: Calculate cost based on mathematical cost function formula
 	for(i=0; i<m; i++){
-		cost += (-y[i][0] * log2(yhat[i][0]) + (1 - y[i][0]) * log2(1 - yhat[i][0]));
-		//cost += pow(yhat[i][1] - y[i][1],2);
+		cost += pow(yhat[i][1] - y[i][1],2);
 	}
-	//return (cost/m);
-	return (cost);
-	/*double cost = 0;
-	int i=0;
-	// TODO: Calculate cost based on mathematical cost function formula
-	for(i=0; i<m; i++){ 
-		//h = yhat 
-		//cost += pow(yhat[i][1] - y[i][1],2);
-		cost+=y[i][1]*log(yhat[i][1]+(1-y[i][1]))*log(1-yhat[i][1]);
-	}
-	return (-cost/m);*/
+	return (cost/m);
 }
 
 

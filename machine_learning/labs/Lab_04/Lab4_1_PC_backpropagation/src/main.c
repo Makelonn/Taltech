@@ -97,6 +97,7 @@ void main(void) {
 
 	//dZ2 = A2-Y = yhat - y
 	//TODO: calculate dZ2, use matrix_matrix_sub() function
+	matrix_matrix_sub(1, NUM_OF_OUT_NODES,z2,yhat,dZ2);
 
 
 	printf("dZ2 \n");

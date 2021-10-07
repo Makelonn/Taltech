@@ -38,7 +38,7 @@ double b2[NUM_OF_OUT_NODES];
 double z2[1][NUM_OF_OUT_NODES];	// Predicted output vector
 
 // Hidden layer to output layer weight matrix
-double w2[NUM_OF_OUT_NODES][NUM_OF_OUT_NODES] =    {{0.48}};
+double w2[NUM_OF_OUT_NODES][NUM_OF_OUT_NODES] =    {{0.48, 0.73, 0.03}};
 
 // Predicted values
 double yhat[1][NUM_OF_OUT_NODES];
@@ -51,7 +51,9 @@ double train_y[1][NUM_OF_OUT_NODES] = {{1}};  	// The expected (training) y valu
 void main(void) {
 	double raw_x[1][NUM_OF_FEATURES] = {{23.0, 40.0, 100.0}};	// temp, hum, air_q input values
 
-	normalize_data_2d(1,1, raw_x, train_x);
+	normalize_data_2d(1, NUM_OF_FEATURES, raw_x, train_x);
+	printf("train_x \n");
+	matrix_print(1, NUM_OF_FEATURES, train_x);
 
 	// Lab 3.1
 	linear_forward_nn(train_x, NUM_OF_FEATURES, z1[0], NUM_OF_HID1_NODES, w1, b1);
@@ -71,5 +73,3 @@ void main(void) {
 	double cost = compute_cost(1, yhat, train_y);
 	printf("cost: %f\n", cost);
 }
-
-
