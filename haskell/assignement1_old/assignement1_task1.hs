@@ -1,8 +1,9 @@
 -- Write a program in haskell that determines a String is palindrome or not. 
 -- Examples of some palindroms: Anna, Civic, Kayak, Level, Madam etc.
+import Data.Char
 
-palindrome :: [String] -> [Bool]
-palindrome word = (map toLower word) == reverse (map toLower word)
+palindrome :: String -> Bool
+palindrome word = map toLower word == reverse (map toLower word)
 
 main=do
     let aList1 = "anna"
