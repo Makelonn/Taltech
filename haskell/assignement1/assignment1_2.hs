@@ -12,9 +12,9 @@ between a b c --return if a is between b an c
     | otherwise = False
 
 electricityBill :: Int -> Float 
-electricityBill a
-    | between a 0 50 = fromIntegral a*0.50*1.2
-    | between a 50 150 = (50*0.5 + (fromIntegral a-50)*0.75)*1.2
+electricityBill a --We multiply everything t have the surcharge of 20%
+    | between a 0 50 = fromIntegral a*0.50*1.2 --First 50 units 0.50 $/unit 
+    | between a 50 150 = (50*0.5 + (fromIntegral a-50)*0.75)*1.2 -- The first 50units are a 0.50 and the following a 0.75
     | between a 150 250 = (50*0.5 + 100*0.75 + (fromIntegral a-150)*1.2)*1.2
     | a > 250 = (50 * 0.5 + 100 * 0.75 + 100 * 1.2 + (fromIntegral a-250) * 1.5) * 1.2
 

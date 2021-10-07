@@ -1,19 +1,22 @@
 -- Find the longest palindrome of a list, if nmixedPal2 return nmixedPal2
 import Data.Char
 
-
+--Check if its a palindrome
 palindrome :: String -> Bool
 palindrome "" = False
 palindrome word = map toLower word == reverse (map toLower word)
 
-longestPalindrome :: [String] -> Maybe String
-longestPalindrome [] = Nothing
-longestPalindrome (x:xs) = if length x > length max then Just x else max
-  where max = longestPalindrome xs
 
+--Return the longest word of the list
+longestWord :: [String] -> Maybe String
+longestWord [] = Nothing
+longestWord (x:xs) = if length x > length max then Just x else max
+  where max = longestWord xs
+
+-- Return the longest palindrome of the list if there is one
 longestPalindromeList :: [String] -> Maybe String
 longestPalindromeList [] = Nothing
-longestPalindromeList wordList = longestPalindrome (filter palindrome wordList)
+longestPalindromeList wordList = longestWord (filter palindrome wordList)
 
 main=do
     let palindList = ["kayak", "lol", "reviver"]
