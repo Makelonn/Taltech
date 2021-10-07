@@ -2,34 +2,37 @@
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 
 double single_in_single_out_nn(double  input, double weight) {
-	return input*weight;
+	// TODO: Return the result of multiplication of input and its weight.
+	return input * weight;
 }
 
 
 double weighted_sum(double * input, double * weight, uint32_t INPUT_LEN) {
 	double output = 0;
+	// TODO: Use for loop to multiply all inputs with their weights
 	int i = 0;
-	for(i=0; i<	INPUT_LEN; i++){
-		output += (*(input+i))*(*(weight+i));
+	for (i = 0; i < INPUT_LEN; i++) {
+		output += (*(input + i)) * (*(weight + i));
 	}
- 	return output;
+	return output;
 }
 
 
 double multiple_inputs_single_output_nn(double * input, double *weight, uint32_t INPUT_LEN) {
 	double predicted_value = 0;
-	predicted_value=weighted_sum(input, weight, INPUT_LEN);
+	// TODO: Use weighted_sum function to calculate the output
+	predicted_value = weighted_sum(input, weight, INPUT_LEN);
 	return predicted_value;
 }
 
 
 void elementwise_multiple( double input_scalar, double *weight_vector, double *output_vector, double VECTOR_LEN) {
-	int i=0;
-	for(i=0; i<VECTOR_LEN; i++){
-		*(output_vector+i) = single_in_single_out_nn(input_scalar,(*(weight_vector+i)));
+	// TODO: Use for loop to calculate output_vector
+	int i = 0;
+	for (i = 0; i < VECTOR_LEN; i++) {
+		output_vector[i] = single_in_single_out_nn(input_scalar, (weight_vector[i]));
 	}
 }
 
@@ -39,44 +42,41 @@ void single_input_multiple_output_nn(double input_scalar, double *weight_vector,
 }
 
 
-void matrix_vector_multiplication(double * input_vector, uint32_t INPUT_LEN, double * output_vector,
-	uint32_t OUTPUT_LEN, double weights_matrix[OUTPUT_LEN][INPUT_LEN]) {
-		int i,j;
-	for(i=0; i<OUTPUT_LEN; i++){
-	//For each output calculate the weighted some of all input
-	*(output_vector+i) = 0;
-	for(j=0; j<INPUT_LEN; j++){
-			*(output_vector+i) += *(input_vector+j)*weights_matrix[i][j];
+void matrix_vector_multiplication(double * input_vector, uint32_t INPUT_LEN, double * output_vector, uint32_t OUTPUT_LEN, double weights_matrix[OUTPUT_LEN][INPUT_LEN]) {
+	// TODO: Use two for loops to calculate output vector based on the input vector and weights matrix
+	int i, j;
+	for (i = 0; i < OUTPUT_LEN; i++) {
+		//For each output calculate the weighted some of all input
+		*(output_vector + i) = 0;
+		for (j = 0; j < INPUT_LEN; j++) {
+			*(output_vector + i) += *(input_vector + j) * weights_matrix[i][j];
 		}
 	}
 }
 
 
-void multiple_inputs_multiple_outputs_nn(double * input_vector, uint32_t INPUT_LEN, double * output_vector,
-		uint32_t OUTPUT_LEN, double weights_matrix[OUTPUT_LEN][INPUT_LEN]) {
+void multiple_inputs_multiple_outputs_nn(double * input_vector, uint32_t INPUT_LEN, double * output_vector, uint32_t OUTPUT_LEN, double weights_matrix[OUTPUT_LEN][INPUT_LEN]) {
 	matrix_vector_multiplication(input_vector,INPUT_LEN,output_vector,OUTPUT_LEN,weights_matrix);
 }
 
 
-void hidden_nn( double *input_vector, uint32_t INPUT_LEN,
-				uint32_t HIDDEN_LEN, double in_to_hid_weights[HIDDEN_LEN][INPUT_LEN],
-				uint32_t OUTPUT_LEN, double hid_to_out_weights[OUTPUT_LEN][HIDDEN_LEN], double *output_vector) {
-	//initialize hidden
-	int i=0;
-	double hidden_pred_vector[INPUT_LEN];
-	for(i=0; i<INPUT_LEN; i++) hidden_pred_vector[i] = 0.0;
+void hidden_nn( double *input_vector, uint32_t INPUT_LEN, uint32_t HIDDEN_LEN, double in_to_hid_weights[HIDDEN_LEN][INPUT_LEN], uint32_t OUTPUT_LEN, double hid_to_out_weights[OUTPUT_LEN][HIDDEN_LEN], double *output_vector) {
+	/* TODO: Use matrix_vector_multiplication to calculate values for hidden_layer. Make sure that when you initialize
+	   hidden_pred_vector variable then zero its value with for loop */
 
-	//matrix vector multiplication
+	// TODO: Use matrix_vector_multiplication to calculate output layer values from hidden layer
+	int i = 0;
+	double hidden_pred_vector[INPUT_LEN];
+	for (i = 0; i < INPUT_LEN; i++) hidden_pred_vector[i] = 0.0;
+
 	matrix_vector_multiplication(input_vector, INPUT_LEN, hidden_pred_vector, OUTPUT_LEN, in_to_hid_weights);
 	matrix_vector_multiplication(hidden_pred_vector, INPUT_LEN, output_vector, OUTPUT_LEN, hid_to_out_weights);
-
 }
 
 
 double find_error(double yhat, double y) {
 	// TODO: Use math.h functions to calculate the error with double precision
-	double error = pow(yhat-y,2);
-    return 0;
+	return pow(y - yhat, 2);
 }
 
 
@@ -97,22 +97,20 @@ void brute_force_learning( double input, double weight, double expected_value, d
 		 up_error      =   powf((up_prediction - expected_value),2);
 
 		 // TODO: Calculate down_prediction and down_error on the same way as up_prediction and up_error
-		 down_prediction =  input * (weight - step_amount);
-		 down_error      =  find_error(down_prediction, expected_value);
+		 down_prediction = input * (weight - step_amount);
+		 down_error = powf((down_prediction - expected_value), 2);;
 
 		 if(down_error <  up_error)
 			 // TODO: Change weight value accordingly if down_error is smaller than up_error
-			   weight  -= step_amount ;
+			 weight = weight - step_amount;
 		 if(down_error >  up_error)
 			 // TODO: Change weight value accordingly if down_error is larger than up_error
-			   weight += step_amount;
+			 weight = weight + step_amount;
 	 }
 }
 
 
-void linear_forward_nn(double *input_vector, uint32_t INPUT_LEN,
-						double *output_vector, uint32_t OUTPUT_LEN,
-						double weights_matrix[OUTPUT_LEN][INPUT_LEN], double *weights_b) {
+void linear_forward_nn(double *input_vector, uint32_t INPUT_LEN, double *output_vector, uint32_t OUTPUT_LEN, double weights_matrix[OUTPUT_LEN][INPUT_LEN], double *weights_b) {
 
 	matrix_vector_multiplication(input_vector,INPUT_LEN, output_vector,OUTPUT_LEN,weights_matrix);
 
@@ -123,8 +121,13 @@ void linear_forward_nn(double *input_vector, uint32_t INPUT_LEN,
 
 
 double relu(double x){
-	if(x>0) return x;
-	else return 0;
+	// TODO: Calculate ReLu based on its mathematical formula
+	if (x < 0) {
+		return 0;
+	}
+	else {
+		return x;
+	}
 }
 
 
@@ -137,8 +140,9 @@ void vector_relu(double *input_vector, double *output_vector, uint32_t LEN) {
 
 double sigmoid(double x) {
 	// TODO: Calculate sigmoid based on its mathematical formula
-	 double result =  1 / (1+exp(-x));
-	 //double result = exp(x) / (exp(x) + 1);
+	 double result =  0;
+	 double r = 1 + exp(-x);
+	 result = 1 / r;
 	 return result;
 }
 
@@ -150,27 +154,26 @@ void vector_sigmoid(double * input_vector, double * output_vector, uint32_t LEN)
 }
 
 
-double compute_cost(uint32_t m, double yhat[m][1], double y[m][1]) {
+double compute_cost_old(uint32_t m, double yhat[m][1], double y[m][1]) {
 	double cost = 0;
-	int i=0;
+	double p = 1 / (1 + exp(-(yhat[m][1] * m + y[m][1])));
+	cost = -log(p);
 	// TODO: Calculate cost based on mathematical cost function formula
-	for(i=0; i<m; i++){
-		cost += (-y[i][0] * log(yhat[i][0]) + (1 - y[i][0]) * log(1 - yhat[i][0]));
-		//cost += pow(yhat[i][1] - y[i][1],2);
-	}
-	//return (cost/m);
-	return (cost);
-	/*double cost = 0;
-	int i=0;
-	// TODO: Calculate cost based on mathematical cost function formula
-	for(i=0; i<m; i++){ 
-		//h = yhat 
-		//cost += pow(yhat[i][1] - y[i][1],2);
-		cost+=y[i][1]*log(yhat[i][1]+(1-y[i][1]))*log(1-yhat[i][1]);
-	}
-	return (-cost/m);*/
+	return cost;
 }
 
+double compute_cost(uint32_t m, double yhat[m][1], double y[m][1]) {
+	double cost = 0;
+	// TODO: Calculate cost based on mathematical cost function formula
+	int i;
+	i = 0;
+	while (i < m) {
+		cost = cost + y[i][0] * log(yhat[i][0]) + (1 - y[i][0]) * log(1 - yhat[i][0]);
+		i++;
+	}
+	cost = -(double)(1 / m) * cost;
+	return cost;
+}
 
 void normalize_data_2d(uint32_t ROW, uint32_t COL, double input_matrix[ROW][COL], double output_matrix[ROW][COL]){
 	double max =  -99999999;
@@ -184,7 +187,7 @@ void normalize_data_2d(uint32_t ROW, uint32_t COL, double input_matrix[ROW][COL]
 
 	for(int i=0;i<ROW;i++){
 		for(int j=0;j<COL;j++){
-	    output_matrix[i][j] =  input_matrix[i][j]/max;
+			output_matrix[i][j] =  input_matrix[i][j]/max;
 		}
 	}
 }
