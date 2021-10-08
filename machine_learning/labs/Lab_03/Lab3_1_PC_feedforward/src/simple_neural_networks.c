@@ -44,9 +44,10 @@ void matrix_vector_multiplication(double * input_vector, uint32_t INPUT_LEN, dou
 		int i,j;
 	for(i=0; i<OUTPUT_LEN; i++){
 	//For each output calculate the weighted some of all input
-	*(output_vector+i) = 0;
+		*(output_vector+i) = 0;
 	for(j=0; j<INPUT_LEN; j++){
 			*(output_vector+i) += *(input_vector+j)*weights_matrix[i][j];
+			//output_vector[i] = input_vector[j] * weights_matrix[i][j];
 		}
 	}
 }
