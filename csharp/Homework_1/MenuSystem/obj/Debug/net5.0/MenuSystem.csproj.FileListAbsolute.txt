@@ -1,0 +1,12 @@
+C:\Users\maeli\Documents\INSA\4A\Taltech\csharp\Homework_1\MenuSystem\bin\Debug\net5.0\MenuSystem.deps.json
+C:\Users\maeli\Documents\INSA\4A\Taltech\csharp\Homework_1\MenuSystem\bin\Debug\net5.0\MenuSystem.dll
+C:\Users\maeli\Documents\INSA\4A\Taltech\csharp\Homework_1\MenuSystem\bin\Debug\net5.0\ref\MenuSystem.dll
+C:\Users\maeli\Documents\INSA\4A\Taltech\csharp\Homework_1\MenuSystem\bin\Debug\net5.0\MenuSystem.pdb
+C:\Users\maeli\Documents\INSA\4A\Taltech\csharp\Homework_1\MenuSystem\obj\Debug\net5.0\MenuSystem.csproj.AssemblyReference.cache
+C:\Users\maeli\Documents\INSA\4A\Taltech\csharp\Homework_1\MenuSystem\obj\Debug\net5.0\MenuSystem.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\maeli\Documents\INSA\4A\Taltech\csharp\Homework_1\MenuSystem\obj\Debug\net5.0\MenuSystem.AssemblyInfoInputs.cache
+C:\Users\maeli\Documents\INSA\4A\Taltech\csharp\Homework_1\MenuSystem\obj\Debug\net5.0\MenuSystem.AssemblyInfo.cs
+C:\Users\maeli\Documents\INSA\4A\Taltech\csharp\Homework_1\MenuSystem\obj\Debug\net5.0\MenuSystem.csproj.CoreCompileInputs.cache
+C:\Users\maeli\Documents\INSA\4A\Taltech\csharp\Homework_1\MenuSystem\obj\Debug\net5.0\MenuSystem.dll
+C:\Users\maeli\Documents\INSA\4A\Taltech\csharp\Homework_1\MenuSystem\obj\Debug\net5.0\ref\MenuSystem.dll
+C:\Users\maeli\Documents\INSA\4A\Taltech\csharp\Homework_1\MenuSystem\obj\Debug\net5.0\MenuSystem.pdb
