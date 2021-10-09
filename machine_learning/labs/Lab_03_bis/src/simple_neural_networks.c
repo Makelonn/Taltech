@@ -40,14 +40,13 @@ void single_input_multiple_output_nn(double input_scalar, double *weight_vector,
 
 
 void matrix_vector_multiplication(double * input_vector, uint32_t INPUT_LEN, double * output_vector,
-	uint32_t OUTPUT_LEN, double weights_matrix[OUTPUT_LEN][INPUT_LEN]) {
-		int i,j;
+		uint32_t OUTPUT_LEN, double weights_matrix[OUTPUT_LEN][INPUT_LEN]) {
+			int i,j;
 	for(i=0; i<OUTPUT_LEN; i++){
 	//For each output calculate the weighted some of all input
 		*(output_vector+i) = 0;
 	for(j=0; j<INPUT_LEN; j++){
 			*(output_vector+i) += *(input_vector+j)*weights_matrix[i][j];
-			//output_vector[i] = input_vector[j] * weights_matrix[i][j];
 		}
 	}
 }
@@ -70,43 +69,38 @@ void hidden_nn( double *input_vector, uint32_t INPUT_LEN,
 	//matrix vector multiplication
 	matrix_vector_multiplication(input_vector, INPUT_LEN, hidden_pred_vector, OUTPUT_LEN, in_to_hid_weights);
 	matrix_vector_multiplication(hidden_pred_vector, HIDDEN_LEN, output_vector, OUTPUT_LEN, hid_to_out_weights);
-
 }
 
 
 double find_error(double yhat, double y) {
-	// TODO: Use math.h functions to calculate the error with double precision
 	double error = pow(yhat-y,2);
     return error;
 }
 
 
-//Maybe to check ??
+
 void brute_force_learning( double input, double weight, double expected_value, double step_amount, uint32_t itr) {
    double prediction,error;
    double up_prediction, down_prediction, up_error, down_error;
    int i;
 	 for(i=0;i<itr;i++){
 
-		 prediction  = input * weight;
-		 // TODO: Calculate the error
-		 error = find_error(prediction, expected_value);
+		prediction  = input * weight;
+		error = find_error(prediction, expected_value);
 
-		 printf("Step: %d   Error: %f    Prediction: %f    Weight: %f\n", i, error, prediction, weight);
+		printf("Step: %d   Error: %f    Prediction: %f    Weight: %f\n", i, error, prediction, weight);
 
-		 up_prediction =  input * (weight + step_amount);
-		 up_error      =   powf((up_prediction - expected_value),2);
+		up_prediction =  input * (weight + step_amount);
+		up_error      =  (up_prediction - expected_value)*(up_prediction - expected_value);
+		 //up_error 	   =  powf((up_prediction - expected_value),2);
 
-		 // TODO: Calculate down_prediction and down_error on the same way as up_prediction and up_error
-		 down_prediction =  input * (weight - step_amount);
-		 down_error      =  find_error(down_prediction, expected_value);
+		down_prediction =  input * (weight - step_amount);
+		down_error      =  find_error(down_prediction, expected_value);
 
-		 if(down_error <  up_error)
-			 // TODO: Change weight value accordingly if down_error is smaller than up_error
-			   weight  -= step_amount ;
-		 if(down_error >  up_error)
-			 // TODO: Change weight value accordingly if down_error is larger than up_error
-			   weight += step_amount;
+		if(down_error <  up_error)
+			weight  -= step_amount ;
+		if(down_error >  up_error)
+		    weight += step_amount;
 	 }
 }
 
@@ -116,7 +110,7 @@ void linear_forward_nn(double *input_vector, uint32_t INPUT_LEN,
 						double weights_matrix[OUTPUT_LEN][INPUT_LEN], double *weights_b) {
 
 	matrix_vector_multiplication(input_vector,INPUT_LEN, output_vector,OUTPUT_LEN,weights_matrix);
-
+	
 	for(int k=0;k<OUTPUT_LEN;k++){
 		output_vector[k]+=weights_b[k];
 	}
@@ -137,9 +131,8 @@ void vector_relu(double *input_vector, double *output_vector, uint32_t LEN) {
 
 
 double sigmoid(double x) {
-	// TODO: Calculate sigmoid based on its mathematical formula
-	 double result =  1 / (1+exp(-x));
-	 return result;
+	double result =  1 / (1+exp(-x));
+	return result;
 }
 
 
@@ -152,26 +145,13 @@ void vector_sigmoid(double * input_vector, double * output_vector, uint32_t LEN)
 
 double compute_cost(uint32_t m, double yhat[m][1], double y[m][1]) {
 	double cost = 0;
-	int i=0;
-	// TODO: Calculate cost based on mathematical cost function formula
-	for(i=0; i<m; i++)
-	{
-		cost += (y[i][0] * log(yhat[i][0]) + (1 - y[i][0]) * log(1 - yhat[i][0]));
-		//Log or log2 ?
-		//-y[i][0]
-	}
-	//return (cost/m);
-	cost = -cost/m;
-	return (cost);
-	/*double cost = 0;
-	int i=0;
-	// TODO: Calculate cost based on mathematical cost function formula
-	for(i=0; i<m; i++){ 
-		//h = yhat 
-		//cost += pow(yhat[i][1] - y[i][1],2);
-		cost+=y[i][1]*log(yhat[i][1]+(1-y[i][1]))*log(1-yhat[i][1]);
-	}
-	return (-cost/m);*/
+	for(int i=0; i<m; i++)
+    {
+        //cost += y[0][i] * log(yhat[0][i]) + ( (1 - y[0][i]) * log(1 - yhat[0][i]) );
+		cost += y[i][0] * log(yhat[i][0]) + ( (1 - y[i][0]) * log(1 - yhat[i][0]) );
+    }
+    cost = -cost/m;
+	return cost;
 }
 
 

@@ -8,7 +8,6 @@ double single_in_single_out_nn(double  input, double weight) {
 	return input*weight;
 }
 
-
 double weighted_sum(double * input, double * weight, uint32_t INPUT_LEN) {
 	double output = 0;
 	int i = 0;
@@ -34,7 +33,6 @@ void elementwise_multiple( double input_scalar, double *weight_vector, double *o
 }
 
 
-
 void single_input_multiple_output_nn(double input_scalar, double *weight_vector, double *output_vector, double VECTOR_LEN){
   elementwise_multiple(input_scalar, weight_vector,output_vector,VECTOR_LEN);
 }
@@ -42,11 +40,11 @@ void single_input_multiple_output_nn(double input_scalar, double *weight_vector,
 
 void matrix_vector_multiplication(double * input_vector, uint32_t INPUT_LEN, double * output_vector,
 		uint32_t OUTPUT_LEN, double weights_matrix[OUTPUT_LEN][INPUT_LEN]) {
-	int i,j;
+			int i,j;
 	for(i=0; i<OUTPUT_LEN; i++){
-		//For each output calculate the weighted some of all input
+	//For each output calculate the weighted some of all input
 		*(output_vector+i) = 0;
-		for(j=0; j<INPUT_LEN; j++){
+	for(j=0; j<INPUT_LEN; j++){
 			*(output_vector+i) += *(input_vector+j)*weights_matrix[i][j];
 		}
 	}
@@ -69,15 +67,12 @@ void hidden_nn( double *input_vector, uint32_t INPUT_LEN,
 
 	//matrix vector multiplication
 	matrix_vector_multiplication(input_vector, INPUT_LEN, hidden_pred_vector, OUTPUT_LEN, in_to_hid_weights);
-	matrix_vector_multiplication(hidden_pred_vector, INPUT_LEN, output_vector, OUTPUT_LEN, hid_to_out_weights);
-
+	matrix_vector_multiplication(hidden_pred_vector, HIDDEN_LEN, output_vector, OUTPUT_LEN, hid_to_out_weights);
 }
 
-// Calculate the error using yhat (predicted value) and y (expected value)
 double find_error(double yhat, double y) {
-	// TODO: Use math.h functions to calculate the error with double precision
 	double error = pow(yhat-y,2);
-	return error;
+    return error;
 }
 
 
@@ -88,43 +83,40 @@ void brute_force_learning( double input, double weight, double expected_value, d
    int i;
 	 for(i=0;i<itr;i++){
 
-		 prediction  = input * weight;
-		 // TODO: Calculate the error
-		 error = find_error(prediction, expected_value);
+		prediction  = input * weight;
+		error = find_error(prediction, expected_value);
 
-		 printf("Step: %d   Error: %f    Prediction: %f    Weight: %f\n", i, error, prediction, weight);
+		printf("Step: %d   Error: %f    Prediction: %f    Weight: %f\n", i, error, prediction, weight);
 
-		 up_prediction =  input * (weight + step_amount);
-		 up_error      =   powf((up_prediction - expected_value),2);
+		up_prediction =  input * (weight + step_amount);
+		up_error      =  (up_prediction - expected_value)*(up_prediction - expected_value);
+		 //up_error 	   =  powf((up_prediction - expected_value),2);
 
-		 // TODO: Calculate down_prediction and down_error on the same way as up_prediction and up_error
-		 down_prediction =  input * (weight - step_amount);
-		 down_error      =  find_error(down_prediction, expected_value);
+		down_prediction =  input * (weight - step_amount);
+		down_error      =  find_error(down_prediction, expected_value);
 
-		 if(down_error <  up_error)
-			 // TODO: Change weight value accordingly if down_error is smaller than up_error
-			   weight  -= step_amount ;
-		 if(down_error >  up_error)
-			 // TODO: Change weight value accordingly if down_error is larger than up_error
-			   weight += step_amount;
+		if(down_error <  up_error)
+			weight  -= step_amount ;
+		if(down_error >  up_error)
+		    weight += step_amount;
 	 }
 }
+
 
 void linear_forward_nn(double *input_vector, uint32_t INPUT_LEN,
 						double *output_vector, uint32_t OUTPUT_LEN,
 						double weights_matrix[OUTPUT_LEN][INPUT_LEN], double *weights_b) {
 
 	matrix_vector_multiplication(input_vector,INPUT_LEN, output_vector,OUTPUT_LEN,weights_matrix);
-
+	
 	for(int k=0;k<OUTPUT_LEN;k++){
 		output_vector[k]+=weights_b[k];
 	}
 }
 
 
-
 double relu(double x){
-	if(x>0) return x;
+	if(x>=0) return x;
 	else return 0;
 }
 
@@ -137,9 +129,8 @@ void vector_relu(double *input_vector, double *output_vector, uint32_t LEN) {
 
 
 double sigmoid(double x) {
-	// TODO: Calculate sigmoid based on its mathematical formula
-	 double result =  1 / (1+exp(-x));
-	 return result;
+	double result =  1 / (1+exp(-x));
+	return result;
 }
 
 
@@ -150,17 +141,14 @@ void vector_sigmoid(double * input_vector, double * output_vector, uint32_t LEN)
 }
 
 
-//yhat (predicted value) and y (expected value)
 double compute_cost(uint32_t m, double yhat[m][1], double y[m][1]) {
 	double cost = 0;
-	int i=0;
-	// TODO: Calculate cost based on mathematical cost function formula
-	for(i=0; i<m; i++){ 
-		//h = yhat 
-		//cost += pow(yhat[i][1] - y[i][1],2);
-		cost+=y[i][1]*log(yhat[i][1]+(1-y[i][1]))*log(1-yhat[i][1]);
-	}
-	return (-cost/m);
+	for(int i=0; i<m; i++)
+    {
+    	cost += y[i][0] * log(yhat[i][0]) + ( (1 - y[i][0]) * log(1 - yhat[i][0]) );
+    }
+    cost = -cost/m;
+	return cost;
 }
 
 
@@ -180,6 +168,7 @@ void normalize_data_2d(uint32_t ROW, uint32_t COL, double input_matrix[ROW][COL]
 		}
 	}
 }
+
 
 // Use this function to print matrix values for debugging
 void matrix_print(uint32_t ROW, uint32_t COL, double A[ROW][COL]) {
@@ -216,46 +205,46 @@ void weightsB_zero_initialization(double * weightsB, uint32_t LEN){
 
 
 void relu_backward(uint32_t m, uint32_t LAYER_LEN, double dA[m][LAYER_LEN], double Z[m][LAYER_LEN], double dZ[m][LAYER_LEN]) {
-	//TODO: implement derivative of relu function  You can can choose either to calculate for all example at the same time
-	//or make iteratively. Check formula for derivative lecture 5 on slide 24
-
-	// Let's suppose that : dA is from the next layer (input for back propagation )
-	// Z is the value in the node
-	// dZ is the output we want to calculate
-
-	//m is the number of data / the nb of exemple for the training*/
-	int i=0, ex=0;
-	for(ex=0; ex<m; ex++)
+	int i, j;
+	for(i = 0; i < m ; i++)
 	{
-		for(i=0; i<LAYER_LEN; i++)
+		for(j = 0; j < LAYER_LEN; j++)
 		{
-			dZ[ex][i]=dA[ex][i]*Z[ex][i];
+			if(Z[i][j] >= 0) dZ[i][j] = dA[i][j];
+			else dZ[i][j] = 0;
 		}
 	}
-
 }
 
 
 void linear_backward(uint32_t LAYER_LEN, uint32_t PREV_LAYER_LEN, uint32_t m, double dZ[m][LAYER_LEN],
 		double A_prev[m][PREV_LAYER_LEN], double dW[LAYER_LEN][PREV_LAYER_LEN], double * db ){
-	// TODO: implement linear backward. You can can choose either to calculate for all example at the same time (dw= 1/m *A_prev[T]*dZ;)
-	//or make iteratively  (dw_iter= A_prev[T]*dZ;)
-	// Calculate Dw
-	int i=0, j=0, ex=0;
-	for(i=0;i<LAYER_LEN;i++)
-	{
-		for(j=0; j<PREV_LAYER_LEN; j++)
-		{
-			dW[i][j]=0;
-			for(ex=0; ex<m; ex++)
-			{
-				dW[i][j]+=A_prev[ex][j]*dZ[ex][j];
-			}
-			(*db) += dW[i][j];
-		}
-	}
-	*db= (1/m)*(*db);
+	int i, j;
+	//Transpose dZ
+	double t_dZ[LAYER_LEN][m];
+	matrix_transpose(LAYER_LEN, m, dZ, t_dZ);
 
+	//Bias 
+	double dz_sum[LAYER_LEN];
+
+	matrix_matrix_multiplication(LAYER_LEN, m, PREV_LAYER_LEN, t_dZ, A_prev, dW);
+
+	for(i = 0; i < LAYER_LEN; i++)
+	{
+		for(j = 0; j < PREV_LAYER_LEN; j++)
+		{
+			dW[i][j] = dW[i][j] * (double)(1/m);
+		}
+
+		//bias
+		dz_sum[i] = 0; //init sum i
+		for(j = 0; j < m; j++)
+		{
+			dz_sum[i] += dZ[j][i];
+		}
+
+		db[i] = dz_sum[i] * ((double)1/m);
+	}
 }
 
 
@@ -319,13 +308,12 @@ void weights_update(uint32_t MATRIX_ROW, uint32_t MATRIX_COL, double learning_ra
 									double dW[MATRIX_ROW][MATRIX_COL],
 									double W[MATRIX_ROW][MATRIX_COL]) {
 	//TODO: implement weights_update function
-	int i=0, j=0;
-	for(i=0; i<MATRIX_ROW;i++)
+	int i, j;
+	for(i=0; i<MATRIX_ROW; i ++)
 	{
 		for(j=0; j<MATRIX_COL; j++)
 		{
-			//new W = old_W-alpha(=learning_rate)*dW
-			W[i][j]=W[i][j]-learning_rate*dW[i][j];
+			W[i][j] = W[i][j] - (dW[i][j] * learning_rate);
 		}
 	}
 }
@@ -349,5 +337,3 @@ void matrix_transpose(uint32_t ROW, uint32_t COL, double A[ROW][COL], double A_T
 		}
 	}
 }
-
-
