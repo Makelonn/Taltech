@@ -1,45 +1,45 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "simple_neural_networks.c"
+#include "neural_networks.h"
 
 // Size of the layers
-#define NUM_OF_FEATURES 3 // input values
-#define NUM_OF_HID1_NODES 3
-#define NUM_OF_OUT_NODES 1 // output classes
+#define NUM_OF_FEATURES   	3  	// input values
+#define NUM_OF_HID1_NODES	3
+#define NUM_OF_OUT_NODES	1	// output classes
 
-double learning_rate = 0.01;
+double learning_rate=0.01;
 
 /*Input layer to hidden layer*/
-double a1[1][NUM_OF_HID1_NODES]; // activation function
-double b1[NUM_OF_HID1_NODES];	 // bias
-double z1[1][NUM_OF_HID1_NODES]; // output vector
+double a1[1][NUM_OF_HID1_NODES];	// activation function
+double b1[NUM_OF_HID1_NODES];		// bias
+double z1[1][NUM_OF_HID1_NODES];	// output vector
 
 // Input layer to hidden layer weight matrix
-double w1[NUM_OF_HID1_NODES][NUM_OF_FEATURES] = {{0.25, 0.5, 0.05},	 //hid[0]
-												 {0.8, 0.82, 0.3},	 //hid[1]
-												 {0.5, 0.45, 0.19}}; //hid[2]
+double w1[NUM_OF_HID1_NODES][NUM_OF_FEATURES] =    {{0.25, 0.5,   0.05},   	 //hid[0]
+													{0.8,  0.82,  0.3 },     //hid[1]
+													{0.5,  0.45,  0.19}};   //hid[2]
 
 /*Hidden layer to output layer*/
 double b2[NUM_OF_OUT_NODES];
-double z2[1][NUM_OF_OUT_NODES]; // Predicted output vector
+double z2[1][NUM_OF_OUT_NODES];	// Predicted output vector
 
 // Hidden layer to output layer weight matrix
-double w2[NUM_OF_OUT_NODES][NUM_OF_HID1_NODES] = {{0.48, 0.73, 0.03}};
+double w2[NUM_OF_OUT_NODES][NUM_OF_HID1_NODES] =    {{0.48, 0.73, 0.03}};
 
 // Predicted values
 double yhat[1][NUM_OF_OUT_NODES];
-double yhat_eg[NUM_OF_OUT_NODES]; // Predicted yhat
+double yhat_eg[NUM_OF_OUT_NODES];	// Predicted yhat
 
 // Training data
-double train_x[1][NUM_OF_FEATURES];			 // Training data after normalization
-double train_y[1][NUM_OF_OUT_NODES] = {{1}}; // The expected (training) y values
+double train_x[1][NUM_OF_FEATURES];				// Training data after normalization
+double train_y[1][NUM_OF_OUT_NODES] = {{1}};  	// The expected (training) y values
 
-void main(void)
-{
+
+void main(void) {
 	// Raw training data
-	double raw_x[1][NUM_OF_FEATURES] = {{23.0, 40.0, 100.0}}; // temp, hum, air_q input values
+	double raw_x[1][NUM_OF_FEATURES] = {{23.0, 40.0, 100.0}};	// temp, hum, air_q input values
 
-	normalize_data_2d(NUM_OF_FEATURES, 1, raw_x, train_x); // Data normalization
+	normalize_data_2d(NUM_OF_FEATURES,1, raw_x, train_x);	// Data normalization
 	printf("train_x \n");
 	matrix_print(1, NUM_OF_FEATURES, train_x);
 
@@ -52,7 +52,7 @@ void main(void)
 	printf("Output vector (Z1_2): %f\n", z1[0][1]);
 	printf("Output vector (z1_3): %f\r\n", z1[0][2]);
 
-	vector_relu(z1[0], a1, NUM_OF_HID1_NODES);
+	vector_relu(z1[0],a1,NUM_OF_HID1_NODES);
 	printf("relu_a \n");
 	matrix_print(1, NUM_OF_HID1_NODES, a1);
 
@@ -60,7 +60,7 @@ void main(void)
 	printf("Output vector (Z2): %f\r\n", z2[0][0]);
 
 	/*compute yhat*/
-	vector_sigmoid(z2[0], yhat[0], NUM_OF_OUT_NODES);
+	vector_sigmoid(z2[0],yhat[0], NUM_OF_OUT_NODES);
 	printf("yhat:  %f\n\r", yhat[0][0]);
 
 	double cost = compute_cost(1, yhat, train_y);
@@ -83,6 +83,7 @@ void main(void)
 
 	//dZ2 = A2-Y = yhat - y
 	//TODO: calculate dZ2, use matrix_matrix_sub() function
+	//matrix_matrix_sub(1, NUM_OF_OUT_NODES,z2,yhat,dZ2);
 	matrix_matrix_sub(1, 1, yhat, train_y, dZ2);
 
 	printf("dZ2 \n");
@@ -98,7 +99,7 @@ void main(void)
 	printf("db2 \n");
 	matrix_print(NUM_OF_OUT_NODES, 1, db2);
 
-	double W2_T[NUM_OF_HID1_NODES][NUM_OF_OUT_NODES] = {{0}, {0}, {0}};
+	double W2_T[NUM_OF_HID1_NODES][NUM_OF_OUT_NODES] = {{0},{0},{0}};
 
 	// TODO: Make matrix transpose for output layer, use matrix_transpose() function
 	matrix_transpose(NUM_OF_OUT_NODES, NUM_OF_HID1_NODES, w2, W2_T);
@@ -108,6 +109,7 @@ void main(void)
 
 	// TODO: Make matrix matrix multiplication; use matrix_matrix_multiplication() function
 	// Check for formula on slide 31 (lecture 5)
+	
 	matrix_matrix_multiplication(NUM_OF_HID1_NODES, NUM_OF_OUT_NODES, NUM_OF_OUT_NODES, W2_T, dZ2, dA1);
 
 	printf("dA1 \n");
@@ -126,10 +128,6 @@ void main(void)
 	// Check for formula on slide 31 (lecture 5)
 	linear_backward(NUM_OF_HID1_NODES, NUM_OF_FEATURES, 1, dZ1, train_x, dW1, db1);
 
-	printf("dW1\n");
-	matrix_print(3, 3, dW1);
-	printf("db1\n");
-	matrix_print(NUM_OF_HID1_NODES, 1, db1);
 	/*UPDATE PARAMETERS*/
 
 	// W1 = W1 - learning_rate * dW1
@@ -137,7 +135,7 @@ void main(void)
 	weights_update(NUM_OF_HID1_NODES, NUM_OF_FEATURES, learning_rate, dW1, w1);
 
 	printf("updated W1  \n");
-	matrix_print(NUM_OF_HID1_NODES, NUM_OF_FEATURES, w1);
+	matrix_print( NUM_OF_HID1_NODES, NUM_OF_FEATURES, w1);
 
 	// b1 = b1 - learning_rate * db1
 	// TODO: update bias for b1, use weights_update() function
@@ -151,33 +149,38 @@ void main(void)
 	weights_update(NUM_OF_OUT_NODES, NUM_OF_HID1_NODES, learning_rate, dW2, w2);
 
 	printf("updated W2  \n");
-	matrix_print(NUM_OF_OUT_NODES, NUM_OF_HID1_NODES, w2);
+	matrix_print( NUM_OF_OUT_NODES, NUM_OF_HID1_NODES, w2);
+
 
 	// b2 = b2 - learning_rate * db2
 	// TODO: update bias for b2, use weights_update() function
 	weights_update(NUM_OF_OUT_NODES, 1, learning_rate, db2, b2);
 
 	printf("updated b2  \n");
-	matrix_print(NUM_OF_OUT_NODES, 1, b2);
+	matrix_print( NUM_OF_OUT_NODES, 1, b2);
+
 
 	/*PREDICT*/
 	printf("-------- PREDICT --------\n");
 	double input_x_eg[1][NUM_OF_FEATURES] = {{20, 40, 110}};
 	double input_x[1][NUM_OF_FEATURES] = {{0, 0, 0}};
 
-	normalize_data_2d(1, 1, input_x_eg, input_x);
+	normalize_data_2d(1,1, input_x_eg, input_x);
 
 	/*compute z1*/
 	linear_forward_nn(input_x, NUM_OF_FEATURES, z1[0], NUM_OF_HID1_NODES, w1, b1);
 
 	/*compute a1*/
-	vector_relu(z1[0], a1[0], NUM_OF_HID1_NODES);
+	vector_relu(z1[0],a1[0],NUM_OF_HID1_NODES);
 
 	/*compute z2*/
 	linear_forward_nn(a1[0], NUM_OF_HID1_NODES, z2[0], NUM_OF_OUT_NODES, w2, b2);
-	printf("z2_eg1:  %f \n", z2[0][0]);
+	printf("z2_eg1:  %f \n",z2[0][0]);
 
 	/*compute yhat*/
-	vector_sigmoid(z2[0], yhat_eg, NUM_OF_OUT_NODES);
+	vector_sigmoid(z2[0],yhat_eg, NUM_OF_OUT_NODES);
 	printf("predicted:  %f\n\r", yhat_eg[0]);
+
 }
+
+
