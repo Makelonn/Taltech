@@ -47,7 +47,7 @@ double yhat_eg[NUM_OF_OUT_NODES];	// Predicted yhat
 
 // Training data
 double train_x[DATASET_SIZE][NUM_OF_FEATURES];				// Training data after normalization
-double train_y[DATASET_SIZE][NUM_OF_OUT_NODES] = {{1}, {0}, {1}, {0}};// The expected (training) y values
+double train_y[DATASET_SIZE][NUM_OF_OUT_NODES] = {{1}, {0}, {1}};// The expected (training) y values
 
 //Backward propagation
 double dW1[NUM_OF_HID1_NODES][NUM_OF_FEATURES] = {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}};
