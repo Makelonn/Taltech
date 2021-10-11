@@ -157,12 +157,11 @@ void relu_backward(uint32_t m, uint32_t LAYER_LEN, double dA[m][LAYER_LEN], doub
 	{
 		for(j = 0; j < LAYER_LEN; j++)
 		{
-			if(Z[i][j] >= 0) dZ[i][j] = dA[i][j];
+			if(Z[i][j] > 0) dZ[i][j] = dA[i][j];
 			else dZ[i][j] = 0;
 		}
 	}
 }
-
 
 void linear_backward(uint32_t LAYER_LEN, uint32_t PREV_LAYER_LEN, uint32_t m, double dZ[m][LAYER_LEN],
 		double A_prev[m][PREV_LAYER_LEN], double dW[LAYER_LEN][PREV_LAYER_LEN], double * db ){
@@ -176,21 +175,29 @@ void linear_backward(uint32_t LAYER_LEN, uint32_t PREV_LAYER_LEN, uint32_t m, do
 
 	matrix_matrix_multiplication(LAYER_LEN, m, PREV_LAYER_LEN, t_dZ, A_prev, dW);
 
+	double m_inverse = (double)1/m;
 	for(i = 0; i < LAYER_LEN; i++)
 	{
 		for(j = 0; j < PREV_LAYER_LEN; j++)
 		{
-			dW[i][j] = dW[i][j] * (double)(1/m);
+			dW[i][j] = (double)(m_inverse*dW[i][j]);
 		}
+	}
 
+	//matrix_print(LAYER_LEN, )
+	for(i = 0; i < LAYER_LEN; i++)
+	{
 		//bias
 		dz_sum[i] = 0; //init sum i
 		for(j = 0; j < m; j++)
 		{
 			dz_sum[i] += dZ[j][i];
 		}
-
-		db[i] = dz_sum[i] * ((double)1/m);
+	}
+	
+	for(i = 0; i < LAYER_LEN; i++)
+	{
+		db[i] = (double)(m_inverse * dz_sum[i]);
 	}
 }
 

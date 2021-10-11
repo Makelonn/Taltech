@@ -235,14 +235,20 @@ void linear_backward(uint32_t LAYER_LEN, uint32_t PREV_LAYER_LEN, uint32_t m, do
 		{
 			dW[i][j] = dW[i][j] * (double)(1/m);
 		}
-
+	}
+	
+	for(i = 0; i < LAYER_LEN; i++)
+	{
 		//bias
 		dz_sum[i] = 0; //init sum i
 		for(j = 0; j < m; j++)
 		{
 			dz_sum[i] += dZ[j][i];
 		}
-
+	}
+	
+	for(i = 0; i < LAYER_LEN; i++)
+	{
 		db[i] = dz_sum[i] * ((double)1/m);
 	}
 }
