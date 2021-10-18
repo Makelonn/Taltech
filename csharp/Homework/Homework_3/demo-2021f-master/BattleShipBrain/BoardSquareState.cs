@@ -10,13 +10,13 @@ namespace BattleShipBrain
             switch (IsEmpty: IsShip, IsBomb)
             {
                 case (false, false):
-                    return " ";
-                case (false, true):
                     return "-";
+                case (false, true):
+                    return "+";
                 case (true, false):
-                    return "8";
+                    return "0";
                 case (true, true):
-                    return " *";
+                    return "#";
             }
         }
     }

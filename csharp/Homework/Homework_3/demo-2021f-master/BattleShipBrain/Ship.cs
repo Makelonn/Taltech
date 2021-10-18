@@ -7,7 +7,7 @@ namespace BattleShipBrain
     {
         public string Name { get; private set; } 
         
-        private readonly List<Coordinate> _coordinates = new List<Coordinate>();
+        private readonly List<Coordinate> _coordinates = new List<Coordinate>(); //list of case the ship is in
 
         public Ship(string name, Coordinate position, int length, int height)
         {

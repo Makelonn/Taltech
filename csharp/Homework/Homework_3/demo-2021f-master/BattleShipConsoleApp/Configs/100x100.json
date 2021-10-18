@@ -1,6 +1,6 @@
 {
-  "BoardSizeX": 10,
-  "BoardSizeY": 10,
+  "BoardSizeX": 100,
+  "BoardSizeY": 100,
   "ShipConfigs": [
     {
       "Name": "Patrol",
@@ -27,7 +27,7 @@
       "ShipSizeX": 4
     },
     {
-      "Name": "Carrier",
+      "Name": "Carrier_1x1",
       "Quantity": 1,
       "ShipSizeY": 1,
       "ShipSizeX": 5

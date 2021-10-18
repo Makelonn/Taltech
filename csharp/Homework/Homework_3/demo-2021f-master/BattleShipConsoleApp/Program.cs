@@ -7,10 +7,11 @@ namespace BattleShipConsoleApp
 {
     class Program
     {
-        private static string _basePath;
+        private static string? _basePath;
 
         static void Main(string[] args)
         {
+            //Entering the program
             Console.WriteLine("Hello Battleship!");
             _basePath = args.Length == 1 ? args[0] : System.IO.Directory.GetCurrentDirectory();
             Console.WriteLine($"Base path: {_basePath}");
@@ -37,13 +38,17 @@ namespace BattleShipConsoleApp
                 Console.WriteLine("Loading config...");
                 var confText = System.IO.File.ReadAllText(fileNameStandardConfig);
                 conf = JsonSerializer.Deserialize<GameConfig>(confText);
-                Console.WriteLine(conf);
+                Console.WriteLine("Loading completed !");
+                //Console.WriteLine(conf);//Print loaded config
             }
             
-            var brain = new BSBrain(conf);
+            var brain = new BSBrain(conf!);
+            //Save
             var fileNameSave = _basePath + System.IO.Path.DirectorySeparatorChar + "SaveGames" + System.IO.Path.DirectorySeparatorChar + "game.json";
-            Console.WriteLine(brain.GetBrainJson());
             
+
+            BSConsoleUI.DrawBothBoard(brain.GetBoard(0),brain.GetBoard(1));
+            //Console.WriteLine(brain.GetBrainJson()); 
 
             /*
             var brain = new BSBrain(new GameConfig());

@@ -11,8 +11,8 @@ namespace BattleShipBrain
         
         public class GameBoardDTO
         {
-            public List<List<BoardSquareState>> Board { get; set; }
-            public List<Ship> Ships { get; set; }
+            public List<List<BoardSquareState>> Board { get; set; } = null!;
+            public List<Ship> Ships { get; set; } = null!;
         }
         
     }

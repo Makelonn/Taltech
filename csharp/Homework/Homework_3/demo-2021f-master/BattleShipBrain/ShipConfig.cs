@@ -2,7 +2,7 @@ namespace BattleShipBrain
 {
     public class ShipConfig
     {
-        public string Name { get; set; }
+        public string? Name { get; set; } //should I let it nullable when its the name ???
 
         public int Quantity { get; set; }
         
