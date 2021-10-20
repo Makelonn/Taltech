@@ -5,11 +5,12 @@ rm(list=ls())
 graphics.off()
 source("C:\\Users\\maeli\\Documents\\INSA\\4A\\Taltech\\data_mining\\Homework1\\ml_distance.R")
 
-load("C:\\Users\\maeli\\Documents\\INSA\\4A\\Taltech\\data_mining\\randomly.RData")
+load("C:\\Users\\maeli\\Documents\\INSA\\4A\\Taltech\\data_mining\\Homework1\\ml_2D_data.RData")
+
 plot(x, col=x[,3])
 
 #-> Take a representative sample ?
-data <- random_pts[,1:2] #We don't need to bother ourselves with labels and we work in 2D
+data <- x[,1:2] #We don't need to bother ourselves with labels and we work in 2D
 
 datasize <- as.integer(nrow(data)*0.7) # Our sample will be 70% of the original dataset
 

@@ -2,11 +2,11 @@
 rm(list=ls())
 graphics.off()
 source("C:\\Users\\maeli\\Documents\\INSA\\4A\\Taltech\\data_mining\\Homework1\\ml_distance.R")
-source("C:\\Users\\maeli\\Documents\\INSA\\4A\\Taltech\\data_mining\\Homework1\\ml_DBSCAN_tools.R")
+source("C:\\Users\\maeli\\Documents\\INSA\\4A\\Taltech\\data_mining\\Homework1\\DBSCAN_fixed\\ml_DBSCAN_tools.R")
 # /!\ This file takes a lot of time to execute
 
 #We need non clusterise data
-load("C:\\Users\\maeli\\Documents\\INSA\\4A\\Taltech\\data_mining\\Homework1\\ml_data_dbscan.RData")
+load("C:\\Users\\maeli\\Documents\\INSA\\4A\\Taltech\\data_mining\\Homework1\\DBSCAN_fixed\\ml_data_dbscan.RData")
 dimension <- ncol(x)-1
 nb_data <- nrow(x)
 my_data <- x[,1:dimension]
