@@ -1,5 +1,14 @@
 import tensorflow as tf
 import pathlib
+import os.path
+from load_data import load_images
+import cv2 as cv
+
+LEARNING_RATE = 0.001
+EPOCHS = 50
+OPTIMIZER = 'adam'
+ACTIVATION = 'elu'
+
 
 # Export saved model
 export_dir = 'mymodel'
@@ -15,9 +24,9 @@ x_test = x_test / 255.0
 # Build sequential model by stacking layers, choose optimizer and loss function
 model = tf.keras.models.Sequential()
 model.add(tf.keras.layers.Flatten(input_shape=(28, 28)))
-model.add(tf.keras.layers.Dense(80, activation='elu'))
-model.add(tf.keras.layers.Dense(60, activation='elu'))
-model.add(tf.keras.layers.Dropout(0.2))
+model.add(tf.keras.layers.Dense(80, activation=ACTIVATION))
+model.add(tf.keras.layers.Dense(60, activation=ACTIVATION))
+model.add(tf.keras.layers.Dropout(LEARNING_RATE))
 model.add(tf.keras.layers.Dense(10))
 model.summary()
 
@@ -32,10 +41,37 @@ loss_initial = loss_fn(y_train[:1], predictions).numpy()
 print('Untrained model inital loss: ' + str(loss_initial))
 
 # Train model
-model.compile(optimizer='adam', loss=loss_fn, metrics=['accuracy'])
+model.compile(optimizer=OPTIMIZER, loss=loss_fn, metrics=['accuracy'])
 
 # Adjust model parameters to minimize the loss and train it
-model.fit(x_train, y_train, epochs=5)
+model.fit(x_train, y_train, epochs=EPOCHS)
 
 # Evaluate model performance
+print(x_test, y_test)
 model.evaluate(x_test, y_test, verbose=2)
+
+# Loading my data
+
+data_directory = os.path.abspath(os.getcwd())
+data_directory = os.path.join(data_directory,"my_data")
+my_data = []
+for i in range(1,10):
+    filename = str(i) + ".png"
+    file = os.path.join(data_directory, filename)
+    print(file)
+    image = cv.imread(file, cv.IMREAD_GRAYSCALE)
+    #Resizing our image and normalizing
+    #image = cv.resize(file, (28, 28))
+    #image = image.astype('float32')
+    image = image.reshape(1, 28, 28, 1)
+    """image = 255-image"""
+    image /= 255
+    print(image)
+    my_data.append(image)
+
+pred = model.evaluate(my_data[0])
+print(pred)
+
+"""x_perso, y_perso = load_images(os.path.join(current_directory, "my_data"), x_test, y_test)
+model.evaluate(x_perso, y_perso, verbose = 2)"""
+
