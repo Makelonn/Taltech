@@ -8,6 +8,9 @@
 rm(list=ls())
 graphics.off()
 
+
+load("C:\\Users\\maeli\\Documents\\INSA\\4A\\Taltech\\data_mining\\dataset_300_clean_2.RData")
+
 mu <- function(dataset, feature_index)
 {
   mu <- 0
@@ -34,8 +37,7 @@ teta_square <- function(dataset,feature_index, mu)
 
 fisher_score <- function(dataset)
 {
-  nb_feature <- ncol(dataset) -1
-  print(nb_feature)
+  nb_feature <- ncol(dataset)-1
   nb_class <- max(dataset[,ncol(dataset)])
   fisher_by_feature <- c()
   for(feature in seq(along=1:nb_feature))
@@ -57,8 +59,5 @@ fisher_score <- function(dataset)
   }
   return(fisher_by_feature)
 }
-
-
-load("C:\\Users\\maeli\\Documents\\INSA\\4A\\Taltech\\data_mining\\Homework1\\ml_2D_data.RData")
-
+# /!\ Need to have features
 fisher_for_all_feature <- fisher_score(x)

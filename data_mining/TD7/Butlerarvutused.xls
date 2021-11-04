@@ -1,0 +1,22 @@
+% Deal with butler example 
+
+figure(1)
+clf(figure(1))
+for i=1:10
+    hold on
+    plot3(data(i,1), data(i,2), data (i,3),'--rs', 'MarkerEdgeColor','b','MarkerFaceColor','g', 'MarkerSize', 10)
+end
+grid on 
+axis on
+xlabel 'Dist. km'
+ylabel 'Pak. Arv'
+zlabel 'Aeg'
+
+
+for i=1:50
+    for j=2:0.4:4
+        pov(i,j*25)=-0.0611*i+0.923*j-0,869;
+    end
+end
+figure(2)
+surf(pov)
