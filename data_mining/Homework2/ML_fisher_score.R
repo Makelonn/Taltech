@@ -9,7 +9,7 @@ rm(list=ls())
 graphics.off()
 
 
-load("C:\\Users\\maeli\\Documents\\INSA\\4A\\Taltech\\data_mining\\dataset_300_clean_2.RData")
+load("C:\\Users\\maeli\\Documents\\INSA\\4A\\Taltech\\data_mining\\Homework2\\data\\ML_dataset_3D_labels.RData")
 
 mu <- function(dataset, feature_index)
 {
@@ -35,29 +35,53 @@ teta_square <- function(dataset,feature_index, mu)
   return(teta)
 }
 
-fisher_score <- function(dataset)
+fisher_score <- function(dataset, display=FALSE)
 {
   nb_feature <- ncol(dataset)-1
   nb_class <- max(dataset[,ncol(dataset)])
   fisher_by_feature <- c()
   for(feature in seq(along=1:nb_feature))
   {
+    if(display){
+      display_matrix <- matrix(, nrow = nb_class, ncol=3)
+      colnames(display_matrix) <- c("P_j", "Mu_j", "Teta_j")
+    }
     mu_global <- mu(dataset, feature)
     up_part <- 0
     low_part <- 0
-    for(class_j in seq(along=1:nb_class)){
+    for(class_j in seq(along=1:nb_class))
+    {
       cluster <- dataset[dataset[,ncol(dataset)]==class_j,]
       cluster<- cluster[, 1:ncol(cluster)-1]
       p_j <- nrow(cluster)
       mu_j <- mu(cluster, feature)
       teta_j <- teta_square(cluster, feature, mu_j)
+      if(display){
+        display_matrix[class_j,1] <- p_j
+        display_matrix[class_j,2] <- mu_j
+        display_matrix[class_j,3] <- teta_j
+      }
       up_part <- up_part + p_j*((mu_j - mu_global)**2)
       low_part <- low_part + p_j*teta_j
     }
+    if(display){
+      cat("\nCoefficient calculated :\n")
+      print(display_matrix)}
     fisher <- up_part / low_part
     fisher_by_feature <- c(fisher_by_feature, fisher)
+  }
+  if(display)
+  {
+    fish_display <- matrix(fisher_by_feature, nrow=1)
+    rownames(fish_display) <- c("Fisher score")
+    cat("\nFisher score for all features :\n")
+    print(fish_display)
+    max_index <- which.max(fisher_by_feature)
+    cat("\nThe feature with the maximum fisher score is the feature number : ")
+    cat(max_index)
+    cat("\n")
   }
   return(fisher_by_feature)
 }
 # /!\ Need to have features
-fisher_for_all_feature <- fisher_score(x)
+fisher_score(x, display=TRUE)
