@@ -1,0 +1,14 @@
+12) What is the difference between PCA and SVD? 
+
+pca= principal component analysis
+svd = singular value decomposition
+
+Both are closely related.
+
+PCA only provides one set of basics vectors, where SVD will return 2 sets (rows and columns)
+
+PCA is invariant to mean-translation, as contrary to SVD, which mean that PCA on non mean centered data will not gives the same results as the rows set vectors given by SVD. 
+
+
+5) Why is it not enough to use one characteristic to describe the goodness of the classification 
+model?

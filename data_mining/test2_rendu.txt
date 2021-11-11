@@ -1,0 +1,24 @@
+12) What is the difference between PCA and SVD? 
+
+pca= principal component analysis
+svd = singular value decomposition
+
+Both are closely related.
+
+PCA only provides one set of basics vectors, where SVD will return 2 sets (rows and columns)
+
+PCA is invariant to mean-translation, as contrary to SVD, which mean that PCA on non mean centered data will not gives the same results as the rows set vectors given by SVD. 
+
+5) Which one among the classification model goodness parameters (accuracy, precision, 
+recall specificity, f1-score) are less sensitive to the data balancing?
+
+Accuracy
+
+precision depends on true positive and false positive
+recall depends true positive and false negative
+specificity depends on true negative and false positive
+f1-score depends on recall&precision
+
+Accuracy depends on the number of true classification (true positive + true negative) / number of total value, not anything to do with data balancing
+
++ d'info -> slide 17/32 lecture 5

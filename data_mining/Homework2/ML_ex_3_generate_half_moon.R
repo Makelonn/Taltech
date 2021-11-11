@@ -12,6 +12,7 @@ x2 <- runif(nb_points, pi, 2 * pi) #Second moon angles
   
   
 #Generating our points
+# rnom = normal distribution |  sigma is the variance
 c1 <- cbind(8 * cos(x1) + (rnorm(nb_points) * sigma) - 4, 12 * sin(x1) + rnorm(nb_points) * sigma + 4) #+4 because -4 + 8(shift)
 c2 <- cbind(8 * cos(x2) + (rnorm(nb_points) * sigma) + 4, 12 * sin(x2) + rnorm(nb_points) * sigma + 4 )
   

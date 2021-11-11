@@ -1,0 +1,94 @@
+---------- COURS 5 ----------
+Globally -> Supervised learning
+
+Decision boundary
+
+Feature selection
+
+Gini Index 
+
+Entropy
+
+Fisher Score
+
+KNN
+
+Classification model goodness
+
+Classification outcome
+
+Contxt of info retrival
+
+Contxt of classification
+
+F-measure (!!! is != of f-values )
+
+Decision trees
+
+Information gain (for decision tree)
+
+Pruning (decision tree)
+
+Wrapper models
+
+Rule based classifiers
+
+Bayes theorem + naïve bayes assumption + Bayes model
+
+Conditonnal or not independance
+
+
+
+---------- COURS 6 ----------
+
+Linear separability + hard/soft margin
+
+Lagrangian theory (hyperplane maximizing the margin)
+
+SVM : nonlinear case
+
+Kernel trick
+
+Example of kernel functions
+
+
+---------- COURS 7 ----------
+
+Data normalization
+
+Principal component axis (PCA)
+
+Singular Value Decomposition (SVD)
+
+Linear regression (least squares method)
+
+Model validation
+
+MLE for regression least squares
+
+Model building : feature selection
+
+Quality comparison
+
+Linear model building
+
+Non linear regression
+
+---------- COURS 8 ----------
+
+Pattern recognition
+
+What is a pattern ?
+
+The frequent pattern minin model
+
+Association Rule Generation Framework
+
+Alternative Models: Interesting Patterns
+
+Collective strength
+
+Statistical coeff of correlation
+
+X² mesure
+
