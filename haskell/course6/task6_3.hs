@@ -1,0 +1,3 @@
+ -- We have 3 set of fruits
+ -- write a programm to concatenate the sets
+ -- using monoids and data type fruit
