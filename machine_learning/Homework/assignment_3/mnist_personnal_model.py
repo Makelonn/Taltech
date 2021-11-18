@@ -50,7 +50,7 @@ model.add(tf.keras.layers.Dense(10))
 model.summary()
 
 predictions = model(x_train[:1]).numpy()
-predictions_prob = tf.nn.softmax(predictions).numpy()
+#predictions_prob = tf.nn.softmax(predictions).numpy()
     # print ('Probabilities for each class: ' + str(predictions_prob))
 
     # Take a vector of logits and True index and return scalar loss for each example
@@ -67,18 +67,24 @@ model.fit(x_train, y_train, epochs=EPOCHS, verbose=PRINT)
 
     # Evaluate model performance
     # print(x_test[0], y_test[0])
-r = model.evaluate(x_test, y_test, verbose=2)
+
+"""r = model.evaluate(x_test, y_test, verbose=2)
 own = model.evaluate(x_own, y_own, verbose=2)
 own = model.evaluate(x_own, y_own, verbose=1)
 own2 = model.predict(x_own, verbose=2)
 
 print("Validation data loss : ", r[0], "\t accuracy : ", r[1])
 print("Personnal data loss : ", own[0], "\t accuracy : ", own[1])
-#print("Predict :", own2)
+#print("Predict :", own2)"""
 
 # CONVERT TO LITE MODEL #
 
 converter = tf.lite.TFLiteConverter.from_keras_model(model)
+converter.target_spec.supported_ops = [
+  tf.lite.OpsSet.TFLITE_BUILTINS, # enable TensorFlow Lite ops.
+  tf.lite.OpsSet.SELECT_TF_OPS # enable TensorFlow ops.
+]
+
 tflite_model = converter.convert()
 
 with open(os.path.join(directory,'lebaron_maelie_model.tflite'), 'wb') as f:
