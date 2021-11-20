@@ -22,4 +22,4 @@ main = do
     let myEq = Coef (a, b, c)
     let myResult = fmap solveEquation myEq
     putStrLn "Note that if the equation has no real solution, the result will be (NaN, NaN) ! "
-    putStrLn (show myResult)
+    print myResult
