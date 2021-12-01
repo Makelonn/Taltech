@@ -1,15 +1,15 @@
 Neural Network Tools for STM32 v1.4.0 (AI tools v5.2.0)
-Created date       : 2021-11-26 02:13:24
-Parameters         : generate --name network -m C:/Users/maeli/Documents/INSA/4A/Taltech/machine_learning/Homework/assignment_3/lebaron_maelie_model.tflite --type tflite --compression 1 --verbosity 1 --workspace C:\Users\maeli\AppData\Local\Temp\mxAI_workspace2159526023075001314990183591385955 --output C:\Users\maeli\.stm32cubemx
+Created date       : 2021-12-01 12:02:19
+Parameters         : generate --name network -m C:/Users/maeli/Documents/INSA/4A/Taltech/machine_learning/Homework/assignment_3/lebaron_maelie_model.tflite --type tflite --compression 1 --verbosity 1 --workspace C:\Users\maeli\AppData\Local\Temp\mxAI_workspace5132224425520017313991302563211451 --output C:\Users\maeli\.stm32cubemx
 
-Exec/report summary (generate dur=1.02s err=0)
+Exec/report summary (generate dur=1.78s err=0)
 ------------------------------------------------------------------------------------------------------------------------
 model file         : C:\Users\maeli\Documents\INSA\4A\Taltech\machine_learning\Homework\assignment_3\lebaron_maelie_model.tflite
 type               : tflite (tflite) 
 c_name             : network
 compression        : None
 quantize           : None
-workspace dir      : C:\Users\maeli\AppData\Local\Temp\mxAI_workspace2159526023075001314990183591385955
+workspace dir      : C:\Users\maeli\AppData\Local\Temp\mxAI_workspace5132224425520017313991302563211451
 output dir         : C:\Users\maeli\.stm32cubemx
 
 model_name         : lebaron_maelie_model

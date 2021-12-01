@@ -168,7 +168,7 @@ void BSP_TS_GetState(TS_StateTypeDef* TsState)
     
     /* Y value second correction */
     yr = y / 11;
-    yr = 320 - yr; //Because the board is blue
+    yr = 320 - yr;
     /* Return y position value */
     if(yr <= 0)
     {

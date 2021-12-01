@@ -14,53 +14,7 @@
       <ProjectName>Lab8_1_STM32_MNIST</ProjectName>
       <ProjectNature>C</ProjectNature>
       <Secure />
-      <filestoremove>
-        <file>
-          <name>gpio.h</name>
-        </file>
-        <file>
-          <name>crc.h</name>
-        </file>
-        <file>
-          <name>dma2d.h</name>
-        </file>
-        <file>
-          <name>fmc.h</name>
-        </file>
-        <file>
-          <name>i2c.h</name>
-        </file>
-        <file>
-          <name>ltdc.h</name>
-        </file>
-        <file>
-          <name>spi.h</name>
-        </file>
-        <file>
-          <name>app_x-cube-ai.h</name>
-        </file>
-        <file>
-          <name>constants_ai.h</name>
-        </file>
-        <file>
-          <name>tim.h</name>
-        </file>
-        <file>
-          <name>usart.h</name>
-        </file>
-        <file>
-          <name>stm32f4xx_it.h</name>
-        </file>
-        <file>
-          <name>RTE_Components.h</name>
-        </file>
-        <file>
-          <name>stm32f4xx_hal_conf.h</name>
-        </file>
-        <file>
-          <name>main.h</name>
-        </file>
-      </filestoremove>
+      <filestoremove />
       <sourceEntriesToRemove>
         <sourceEntry />
       </sourceEntriesToRemove>
