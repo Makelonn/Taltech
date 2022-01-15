@@ -1,0 +1,18 @@
+convert structural graphs to multidimensional data by using quantitative
+measures of important structural characteristics as dimensions
+
+Nevertheless, topological descriptors have been shown
+to retain important properties of graphs in the chemical domain, and are therefore used
+quite frequently.
+
+he utility of topological descriptors in graph mining is highly
+domain specific. It should be pointed out that topological descriptors share a number of
+conceptual similarities with the frequent subgraph approach in the previous section
+
+Most topological descriptors are graph specific, whereas a few are node-specific. The
+vector of node-specific descriptors can sometimes describe the graph quite well. Node specific
+descriptors can also be used for enriching the labels of the nodes. Some common examples
+of topological descriptors are as follows
+
+
+Topological descriptors use quantitative measure from structural graph as dimensions. They are indexes used to describe the structure and the properties of the graph. Some topological descriptor are node specific, as Morgan Index (number of other node reachable within a distance k), or graph specific, as Weiner Index (sum of the pairwise shortest path). In some domain, as in chemistry (crystallography) topological descriptors help studying the structure of matter.

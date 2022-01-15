@@ -52,7 +52,7 @@ double train_y[DATASET_SIZE][NUM_OF_OUT_NODES] = {{1}, {0}, {1}};// The expected
 //Backward propagation
 double dW1[NUM_OF_HID1_NODES][NUM_OF_FEATURES] = {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}};
 double dW2[NUM_OF_HID2_NODES][NUM_OF_HID1_NODES] = {{0, 0, 0, 0, 0}, {0, 0, 0, 0, 0}, {0, 0, 0, 0, 0}, {0, 0, 0, 0, 0}};
-double dW3[NUM_OF_OUT_NODES][NUM_OF_HID1_NODES] = {{0, 0, 0}};
+double dW3[NUM_OF_OUT_NODES][NUM_OF_HID2_NODES] = {{0, 0, 0}};
 
 double dA1[DATASET_SIZE][NUM_OF_HID1_NODES] = {{0, 0, 0, 0, 0},{0, 0, 0, 0, 0},{0, 0, 0, 0, 0}};
 double dA2[DATASET_SIZE][NUM_OF_HID2_NODES] = {{0, 0, 0, 0},{0, 0, 0, 0},{0, 0, 0, 0}};

@@ -1,0 +1,29 @@
+An important part of this section is the preprocessing
+methodologies, such as topological descriptors and kernel methods
+
+Topological descriptors convert structural graphs to multidimensional data by using quantitative
+measures of important structural characteristics as dimensions. After the conversion
+has been performed, multidimensional data mining algorithms can be used on the transformed
+representation. This approach enables the use of a wide variety of multidimensional
+data mining algorithms in graph-based applications. The drawback of the approach is that
+the structural information is lost. Nevertheless, topological descriptors have been shown
+to retain important properties of graphs in the chemical domain, and are therefore used
+quite frequently. In general, the utility of topological descriptors in graph mining is highly
+domain specific. It should be pointed out that topological descriptors share a number of
+conceptual similarities with the frequent subgraph approach in the previous section.
+
+The main difference is that carefully chosen topological parameters are used to define the new
+feature space instead of frequent subgraphs.
+Most topological descriptors are graph specific, whereas a few are node-specific. The
+vector of node-specific descriptors can sometimes describe the graph quite well. Node specific
+descriptors can also be used for enriching the labels of the nodes. Some common examples
+of topological descriptors are as follows:
+1. Morgan index: This is a node-specific index that is equal to the kth order degree of a
+node. In other words, the descriptor is equal to the number of nodes reachable from
+the node within a distance of k. This is one of the few descriptors that describes nodes,
+rather than the complete graph. The node-specific descriptors can also be converted
+to a graph-specific descriptor by using the frequency histogram of the Morgan index
+over different nodes.
+2. Wiener index: The Wiener index is equal to the sum of the pairwise shortest path
+distances between all pairs of nodes. It is therefore required to compute the all-pairs
+shortest path distance between different pairs of nodes.

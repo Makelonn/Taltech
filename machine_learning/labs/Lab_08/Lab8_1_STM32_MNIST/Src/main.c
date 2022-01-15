@@ -236,7 +236,7 @@ int main(void)
 				nn_input_data[x - 1][y + 1] = PXL_SET;
 				nn_input_data[x][y] = PXL_SET;
 
-				printf("Maelie : X =%d Y=%d\r\n", ui_state.X, ui_state.Y);
+				printf("X =%d Y=%d\r\n", ui_state.X, ui_state.Y);
 
 			} else if ((ui_state.X > ERASE_BUTTON_X1 && ui_state.X < ERASE_BUTTON_X2) && (ui_state.Y > ERASE_BUTTON_Y1 && ui_state.Y < ERASE_BUTTON_Y2)) {
 				// TODO: LAB7: When erase button is pressed reset user interface.
@@ -279,7 +279,7 @@ int main(void)
 		BSP_LCD_DisplayStringAt(130, 255, (uint8_t *) _1st_pred_str, LEFT_MODE);
 
 		// Display probability of 1st guess
-		sprintf(_1st_pred_prob_str, "%.1f", (float)_1st_pred.prob);
+		sprintf(_1st_pred_prob_str, "%.1f", (float)_1st_pred.prob*100);
 		BSP_LCD_DisplayStringAt(10, 220, (uint8_t *) _1st_pred_prob_str, LEFT_MODE);
 		BSP_LCD_DisplayStringAt(80, 220, (uint8_t *) "%", LEFT_MODE);
 
@@ -411,7 +411,7 @@ void user_interface_reset(void) {
 	// Set background color (lightcyan)
 	BSP_LCD_SetBackColor(LCD_COLOR_LIGHTCYAN);
 
-	BSP_LCD_DisplayStringAt(20,20, (uint8_t *) "Maelie L model", CENTER_MODE);
+	//BSP_LCD_DisplayStringAt(20,20, (uint8_t *) "Maelie L model", CENTER_MODE);
 	// Write prediction output string "NN OUTPUT" to position x,y = (5, 255)
 	BSP_LCD_DisplayStringAt(5,  255,  (uint8_t*) "NN OUTPUT: ", LEFT_MODE);
 
