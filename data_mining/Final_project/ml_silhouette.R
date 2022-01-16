@@ -1,7 +1,8 @@
 #Silhouette
 
-rm(list=ls())
-graphics.off()
+#rm(list=ls())
+#graphics.off()
+save_results <- TRUE
 
 
 source("C:\\Users\\maeli\\Documents\\INSA\\4A\\Taltech\\data_mining\\Final_project\\ml_distance.R")
@@ -77,6 +78,8 @@ K <- max(classified[,ncol(classified)])
 plot(1:nrow(cluster_with_sil),
      cluster_with_sil$Silhouette_value, type="h", xaxt = "n", xlab = "Cluster label",
      ylab = "Silhouette", col=cluster_with_sil$Cluster)
-
+if(save_results)
+{
 save(my_sil, file="C:\\Users\\maeli\\Documents\\INSA\\4A\\Taltech\\data_mining\\Final_project\\data\\result_sil_unordered.RData")
 save(cluster_with_sil, file="C:\\Users\\maeli\\Documents\\INSA\\4A\\Taltech\\data_mining\\Final_project\\data\\result_sil_ordered.RData")
+}
