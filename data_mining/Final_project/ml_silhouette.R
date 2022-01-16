@@ -1,11 +1,14 @@
+#Silhouette
+
 rm(list=ls())
 graphics.off()
 
-source("C:\\Users\\maeli\\Documents\\INSA\\4A\\Taltech\\data_mining\\Homework1\\ml_distance.R")
+
+source("C:\\Users\\maeli\\Documents\\INSA\\4A\\Taltech\\data_mining\\Final_project\\ml_distance.R")
 # Compute the silhouette
 # Dataset should have the label as the last col and all the other cols are the coordinate
 
-load("C:\\Users\\maeli\\Documents\\INSA\\4A\\Taltech\\data_mining\\Homework1\\ml_2D_data.RData")
+load("C:\\Users\\maeli\\Documents\\INSA\\4A\\Taltech\\data_mining\\Final_project\\data\\result_kmeans.RData")
 #label is the cluster to which we want to do the distance
 # dataset should contain the label
 # point should NOT contain its label, only the coordinate
@@ -50,7 +53,7 @@ silhouette <- function(dataset)
     for(cl in seq(along=1:k))
     {
       if(cl != label_point){
-      dist_other_cluster <- c(dist_other_cluster, average_dist_other_cluster(dataset, point_to_study, cl))
+        dist_other_cluster <- c(dist_other_cluster, average_dist_other_cluster(dataset, point_to_study, cl))
       }
     }
     cluster_in <- dataset[-p,] # Remove the point we are studying
@@ -65,13 +68,15 @@ silhouette <- function(dataset)
   return(sil)
 }
 
-my_sil <- silhouette(x)
-cat("Done")
-cluster_with_sil <- data.frame(x[,ncol(x)], my_sil)
+my_sil <- silhouette(classified)
+cluster_with_sil <- data.frame(classified[,ncol(classified)], my_sil)
 colnames(cluster_with_sil)<-c("Cluster","Silhouette_value")
 #We order by cluster and then by silhouette value
 cluster_with_sil <- cluster_with_sil[order(cluster_with_sil$Cluster,cluster_with_sil$Silhouette_value),]
-K <- max(x[,ncol(x)])
+K <- max(classified[,ncol(classified)])
 plot(1:nrow(cluster_with_sil),
-       cluster_with_sil$Silhouette_value, type="h", xaxt = "n", xlab = "Cluster label",
-       ylab = "Silhouette", col=cluster_with_sil$Cluster)
+     cluster_with_sil$Silhouette_value, type="h", xaxt = "n", xlab = "Cluster label",
+     ylab = "Silhouette", col=cluster_with_sil$Cluster)
+
+save(my_sil, file="C:\\Users\\maeli\\Documents\\INSA\\4A\\Taltech\\data_mining\\Final_project\\data\\result_sil_unordered.RData")
+save(cluster_with_sil, file="C:\\Users\\maeli\\Documents\\INSA\\4A\\Taltech\\data_mining\\Final_project\\data\\result_sil_ordered.RData")

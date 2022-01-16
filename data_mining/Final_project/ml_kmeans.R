@@ -49,11 +49,9 @@ get_label <- function(dataset, centroids){
 
 # We prepare the data : we split between the training set and the validation set
 ml_k_means <- function(dataset, K=3, print_val=FALSE){
-  cat("here")
   data_dimensionality = ncol(dataset)
-  cat("here")
+
   train_ind <- sample(seq_len(nrow(dataset)), size = nrow(dataset))
-  cat("here")
   train_set <- dataset[train_ind, ]
   
   # Starting k means, with k=3 to begin with
@@ -95,9 +93,9 @@ ml_k_means <- function(dataset, K=3, print_val=FALSE){
   points(centroids[,1], centroids[,2], col="red", type="p", pch=20)
   }
   
-  plot(train_set[, 1:2],xlim=c(-0.1,3), ylim=c(-0.1,3), type='p', col=train_set[,ncol(train_set)], pch=20, xlab="Dim1", ylab="Dim2", main="Centroid using kmeans")
-  par(new=TRUE)
-  plot(centroids[,1:2],xlim=c(-0.1,3), ylim=c(-0.1,3), type='p', col='blueviolet', pch=15, xlab="", ylab="", main="")
+  #plot(train_set[, 1:2],xlim=c(-0.1,3), ylim=c(-0.1,3), type='p', col=train_set[,ncol(train_set)], pch=20, xlab="Dim1", ylab="Dim2", main="Centroid using kmeans")
+  #par(new=TRUE)
+  #plot(centroids[,1:2],xlim=c(-0.1,3), ylim=c(-0.1,3), type='p', col='blueviolet', pch=15, xlab="", ylab="", main="")
   return(train_set)
   }
 

@@ -1,11 +1,10 @@
-rm(list=ls())
-graphics.off()
+#rm(list=ls())
+#graphics.off()
 
-source("C:\\Users\\maeli\\Documents\\INSA\\4A\\Taltech\\data_mining\\Homework1\\ml_distance.R")
+source("C:\\Users\\maeli\\Documents\\INSA\\4A\\Taltech\\data_mining\\Final_project\\ml_distance.R")
 # Compute the silhouette
 # Dataset should have the label as the last col and all the other cols are the coordinate
 
-load("C:\\Users\\maeli\\Documents\\INSA\\4A\\Taltech\\data_mining\\Homework1\\ml_2D_data.RData")
 #label is the cluster to which we want to do the distance
 # dataset should contain the label
 # point should NOT contain its label, only the coordinate
@@ -40,12 +39,13 @@ average_dist_same_cluster <- function(cluster, point)
 silhouette <- function(dataset)
 {
   #We will add values as we compute them
+  dim <- ncol(dataset) -1
   sil <- vector()
   k <- max(dataset[,ncol(dataset)])
   for(p in seq(along=1:nrow(dataset)))
   {
-    point_to_study <- dataset[p, 1:(ncol(dataset)-1)]
-    label_point <- dataset[p, ncol(dataset)]
+    point_to_study <- dataset[p, 1:dim]
+    label_point <- dataset[p, dim+1]
     dist_other_cluster <- vector()
     for(cl in seq(along=1:k))
     {
@@ -64,14 +64,3 @@ silhouette <- function(dataset)
   }
   return(sil)
 }
-
-my_sil <- silhouette(x)
-cat("Done")
-cluster_with_sil <- data.frame(x[,ncol(x)], my_sil)
-colnames(cluster_with_sil)<-c("Cluster","Silhouette_value")
-#We order by cluster and then by silhouette value
-cluster_with_sil <- cluster_with_sil[order(cluster_with_sil$Cluster,cluster_with_sil$Silhouette_value),]
-K <- max(x[,ncol(x)])
-plot(1:nrow(cluster_with_sil),
-       cluster_with_sil$Silhouette_value, type="h", xaxt = "n", xlab = "Cluster label",
-       ylab = "Silhouette", col=cluster_with_sil$Cluster)
